@@ -1,19 +1,17 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../assets/colors'
+import {colors} from '../../assets/colors';
 
 export default styles = StyleSheet.create({
-  container: {
-  },
   contentStyle: {
-      flex: 1,
-      paddingTop: 100,
+    flex: 1,
+    paddingTop: 100,
+    alignItems: 'center',
   },
   signupButton: {
-    height: 48,
-    flexDirection: 'row',
+    marginTop: 10,
+    padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'center',
   },
   signup: {
     color: colors.black,
