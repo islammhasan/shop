@@ -3,11 +3,11 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {colors} from '../../assets';
 
 export const Button = (props) => {
-  const {isLargeButton, title} = props;
+  const {isLargeButton, title, customStyle} = props;
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      style={[styles.container, {width: isLargeButton ? 400 : 245}]}
+      style={[styles.container, {width: isLargeButton ? 400 : 245}, customStyle]}
       {...props}>
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>

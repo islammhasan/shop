@@ -4,7 +4,7 @@ import {Button, PrimaryInput} from '../../components/';
 import {images} from '../../assets/';
 import styles from './styles';
 
-export const Login = () => {
+export const SignUp = () => {
   return (
     <ScrollView contentContainerStyle={styles.contentStyle}>
       <TouchableOpacity
@@ -20,21 +20,22 @@ export const Login = () => {
       </TouchableOpacity>
       <Text
         style={styles.headerText}>
-        Login
+        Signup
       </Text>
 
+      <PrimaryInput text={'Name'} />
       <PrimaryInput text={'Email'} />
       <PrimaryInput securedInput text={'Password'} />
 
       <Button
         customStyle={{marginTop: 30}}
-        title="Login"
-        onPress={() => alert('Logged in')}
+        title="Sign up"
+        onPress={() => alert('Signed up!')}
       />
       <TouchableOpacity activeOpacity={0.8} style={styles.signupButton}>
         <Text style={{color: '#A6A6A6'}}>
-          Don't have an account?
-          <Text style={styles.signup}> Signup</Text>
+          Already have an account?
+          <Text style={styles.signup}> Sign in</Text>
         </Text>
       </TouchableOpacity>
     </ScrollView>
