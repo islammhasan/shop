@@ -15,7 +15,7 @@ import styles from './styles';
 export const Home = () => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Header />
+      <Header hasCart hasFilter />
       <View style={styles.searchBar}>
         <View style={styles.searchIcon}>
           <Image

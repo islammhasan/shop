@@ -2,7 +2,8 @@ import React from 'react';
 import {View, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {images} from '../../assets';
 
-export const Header = () => {
+export const Header = (props) => {
+  const {hasSearch, hasFilter, hasCart} = props;
   return (
     <View style={styles.headerStyle}>
       <View>
@@ -20,20 +21,33 @@ export const Header = () => {
           width: 70,
           justifyContent: 'space-between',
         }}>
-        <TouchableOpacity style={styles.iconContainer}>
-          <Image
-            source={images.cart}
-            resizeMode="contain"
-            style={{width: 25}}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.iconContainer}>
-          <Image
-            source={images.filter}
-            resizeMode="contain"
-            style={{width: 25}}
-          />
-        </TouchableOpacity>
+        {hasSearch && (
+          <TouchableOpacity style={styles.iconContainer}>
+            <Image
+              source={images.search}
+              resizeMode="contain"
+              style={{width: 25}}
+            />
+          </TouchableOpacity>
+        )}
+        {hasCart && (
+          <TouchableOpacity style={styles.iconContainer}>
+            <Image
+              source={images.cart}
+              resizeMode="contain"
+              style={{width: 25}}
+            />
+          </TouchableOpacity>
+        )}
+        {hasFilter && (
+          <TouchableOpacity style={styles.iconContainer}>
+            <Image
+              source={images.filter}
+              resizeMode="contain"
+              style={{width: 25}}
+            />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
