@@ -3,12 +3,15 @@ import {StyleSheet} from 'react-native';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 45,
+    paddingTop: 15,
 
     // alignItems: 'center',
   },
   searchBar: {
-    width: 343,
+    marginTop: 15,
+    alignSelf: 'center',
+    // width: 343,
+    marginHorizontal: 16.5,
     height: 52,
     backgroundColor: '#fff',
     flexDirection: 'row',
