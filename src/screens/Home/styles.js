@@ -2,7 +2,10 @@ import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    flex: 1,
+    paddingTop: 45,
+
+    // alignItems: 'center',
   },
   searchBar: {
     width: 343,
@@ -10,6 +13,7 @@ export default styles = StyleSheet.create({
     backgroundColor: '#fff',
     flexDirection: 'row',
     alignItems: 'center',
+    elevation: 7,
     shadowOffset: {
       width: 2,
       height: 2,
