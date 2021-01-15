@@ -8,31 +8,32 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {colors} from '../../assets/colors';
-import {images} from '../../assets/';
 
 export const PrimaryInput = (props) => {
-  const {text, securedInput} = props;
-  const [showPassword, setShowPassword] = useState(true);
+  const {text, passwordInput, rightIcon, rightIconStyle, onPress} = props;
   return (
     <View style={styles.container}>
       <Text style={styles.labelStyle}>{text}</Text>
-      {/* <TextInput secureTextEntry={showPassword} style={styles.inputStyle} /> */}
-      {securedInput ? (
-        <>
-          <TextInput secureTextEntry={showPassword} style={styles.inputStyle} />
+      <View style={{flexDirection: 'row'}}>
+        <TextInput
+          {...props}
+          style={{
+            flex: 1,
+          }}
+        />
+        {rightIcon && (
           <TouchableOpacity
-            onPress={() => setShowPassword(!showPassword)}
+            onPress={onPress}
+            disabled={!passwordInput}
             style={styles.iconContainer}>
             <Image
-              source={images.password}
-              style={styles.iconStyle}
+              source={rightIcon}
+              style={rightIconStyle}
               resizeMode="contain"
             />
           </TouchableOpacity>
-        </>
-      ) : (
-        <TextInput style={styles.inputStyle} />
-      )}
+        )}
+      </View>
     </View>
   );
 };
@@ -57,11 +58,8 @@ const styles = StyleSheet.create({
     height: 12.5,
   },
   iconContainer: {
-    width: 50,
-    height: 30,
-    position: 'absolute',
-    right: 0,
-    bottom: 8,
+    width: 40,
+    height: 40,
     alignItems: 'center',
     justifyContent: 'center',
   },
