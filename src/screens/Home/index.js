@@ -5,79 +5,51 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-  TextInput,
   FlatList,
 } from 'react-native';
 import {images} from '../../assets';
 import {Header} from '../../components/Header';
+import {SearchBar} from '../../components/SearchBar';
 import styles from './styles';
 
 export const Home = () => {
   return (
-    <View style={{flex: 1, paddingTop: 45}}>
+    <View style={styles.firstLevelContainer}>
       <Header
+        hasMenu
         hasCart
         hasFilter
         onMenuPress={() => alert('onMenuPress')}
         onCartPress={() => alert('onCartPress')}
         onFilterPress={() => alert('onFilterPress')}
       />
-      <View style={styles.searchBar}>
-        <TouchableOpacity style={styles.searchIcon}>
-          <Image
-            source={images.search}
-            resizeMode="contain"
-            style={{width: 20, height: 20}}
-          />
-        </TouchableOpacity>
-        {/* <View style={{flex: 1}}> */}
-        <TextInput
-          // onChangeText={}
-          // value={}
-          placeholder={'Search Your Product'}
-          placeholderTextColor="grey"
-          // defaultValue='ddddd'
-          style={{fontSize: 18, paddingEnd: 10, flex: 1}}
-        />
-        {/* </View> */}
-      </View>
+      <SearchBar />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.container}>
-        <View
-          style={{
-            // width: 343,
-            // height: 125,
-            paddingStart: 16.5,
-
-            // marginTop: 25,
-            // padding: 5,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 22}}>Categories</Text>
-            <Text style={{fontSize: 14, marginEnd: 16.5}}>See all</Text>
+        <View style={styles.listComponentStyle}>
+          <View style={styles.listComponentLabelsStyle}>
+            <Text style={styles.listLabel}>Categories</Text>
+            <TouchableOpacity
+              onPress={() => {
+                alert('See All');
+              }}
+              activeOpacity={0.8}>
+              <Text style={styles.seeAllLabel}>See all</Text>
+            </TouchableOpacity>
           </View>
           <FlatList
-            style={{paddingTop: 20}}
+            style={styles.listSpacing}
             data={DATA}
             showsHorizontalScrollIndicator={false}
-            // ItemSeparatorComponent={() => <View style={{width: 20}}></View>}
             renderItem={({item}) => (
               <TouchableOpacity
-                style={{
-                  width: 114,
-                  height: 65,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginEnd: 20,
+                onPress={() => {
+                  alert('Category!');
                 }}
+                style={styles.listItemContainer}
                 activeOpacity={0.8}>
-                <Image style={{width: 114, height: 65}} source={item.url} />
+                <Image style={styles.catListItemImage} source={item.url} />
               </TouchableOpacity>
             )}
             keyExtractor={(item) => item.id}
@@ -85,42 +57,33 @@ export const Home = () => {
           />
         </View>
         {/* FEATURED */}
-        <View
-          style={{
-            // width: 343,
-            // height: 296,
-            paddingStart: 16.5,
-            marginTop: 20,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 22}}>Featured</Text>
-            <Text style={{fontSize: 14, marginEnd: 16.5}}>See all</Text>
+        <View style={styles.listComponentStyle}>
+          <View style={styles.listComponentLabelsStyle}>
+            <Text style={styles.listLabel}>Featured</Text>
+            <TouchableOpacity
+              onPress={() => {
+                alert('See All');
+              }}
+              activeOpacity={0.8}>
+              <Text style={styles.seeAllLabel}>See all</Text>
+            </TouchableOpacity>
           </View>
           <FlatList
-            style={{paddingTop: 20}}
+            style={styles.listSpacing}
             data={featureData}
             showsHorizontalScrollIndicator={false}
-            // ItemSeparatorComponent={() => <View style={{width: 20}}></View>}
             renderItem={({item}) => (
               <TouchableOpacity
-                style={{
-                  marginEnd: 20,
-                  width: 150,
+                onPress={() => {
+                  alert('Product details: ' + item.title);
                 }}
+                style={styles.listItemContainer}
                 activeOpacity={0.8}>
-                <Image
-                  style={{width: 150, height: 180, borderRadius: 8}}
-                  source={item.url}
-                />
-                <Text numberOfLines={1} style={{fontSize: 16, marginTop: 11}}>
+                <Image style={styles.itemComponentImage} source={item.url} />
+                <Text numberOfLines={1} style={styles.itemPrice}>
                   {item.price}
                 </Text>
-                <Text numberOfLines={1} style={{fontSize: 16, marginTop: 7}}>
+                <Text numberOfLines={1} style={styles.itemTitle}>
                   {item.title}
                 </Text>
               </TouchableOpacity>
@@ -130,44 +93,33 @@ export const Home = () => {
           />
         </View>
         {/* BEST SELL */}
-        <View
-          style={{
-            // width: 343,
-            // height: 296,
-            paddingStart: 16.5,
-
-            marginTop: 20,
-            // padding: 5,
-          }}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 22}}>Best Sell</Text>
-            <Text style={{fontSize: 14, marginEnd: 16.5}}>See all</Text>
+        <View style={styles.listComponentStyle}>
+          <View style={styles.listComponentLabelsStyle}>
+            <Text style={styles.listLabel}>Best Sell</Text>
+            <TouchableOpacity
+              onPress={() => {
+                alert('See All');
+              }}
+              activeOpacity={0.8}>
+              <Text style={styles.seeAllLabel}>See all</Text>
+            </TouchableOpacity>
           </View>
           <FlatList
-            style={{paddingTop: 20}}
+            style={styles.listSpacing}
             data={bestSellData}
             showsHorizontalScrollIndicator={false}
-            // ItemSeparatorComponent={() => <View style={{width: 20}}></View>}
             renderItem={({item}) => (
               <TouchableOpacity
-                style={{
-                  marginEnd: 20,
-                  width: 150,
+                onPress={() => {
+                  alert('Product details: ' + item.title);
                 }}
+                style={styles.listItemContainer}
                 activeOpacity={0.8}>
-                <Image
-                  style={{width: 150, height: 180, borderRadius: 8}}
-                  source={item.url}
-                />
-                <Text numberOfLines={1} style={{fontSize: 16, marginTop: 11}}>
+                <Image style={styles.itemComponentImage} source={item.url} />
+                <Text numberOfLines={1} style={styles.itemPrice}>
                   {item.price}
                 </Text>
-                <Text numberOfLines={1} style={{fontSize: 16, marginTop: 7}}>
+                <Text numberOfLines={1} style={styles.itemTitle}>
                   {item.title}
                 </Text>
               </TouchableOpacity>
@@ -195,15 +147,15 @@ const DATA = [
     url: images.kidsCat,
   },
   {
-    id: 11651,
+    id: 651,
     url: images.manCat,
   },
   {
-    id: 21656,
+    id: 4205,
     url: images.womanCat,
   },
   {
-    id: 31651,
+    id: 7524,
     url: images.kidsCat,
   },
 ];
@@ -228,19 +180,19 @@ const featureData = [
     url: images.feature3,
   },
   {
-    id: 14984,
+    id: 8946513,
     title: 'Woman T-Shirt',
     price: '$55.00',
     url: images.feature1,
   },
   {
-    id: 26511,
+    id: 1214,
     title: 'Man T-Shirt',
     price: '$34.00',
     url: images.feature2,
   },
   {
-    id: 39849,
+    id: 61512365,
     title: 'Woman T-Shirt',
     price: '$34.00',
     url: images.feature3,
@@ -249,37 +201,37 @@ const featureData = [
 
 const bestSellData = [
   {
-    id: 16511,
+    id: 6511235,
     title: 'Woman T-Shirt',
     price: '$24.00',
     url: images.feature4,
   },
   {
-    id: 26865,
+    id: 3516216,
     title: 'Man T-Shirt',
     price: '$44.00',
     url: images.feature5,
   },
   {
-    id: 39542,
+    id: 658941,
     title: 'Woman T-Shirt',
     price: '$34.00',
     url: images.feature3,
   },
   {
-    id: 16511,
+    id: 984123,
     title: 'Woman T-Shirt',
     price: '$24.00',
     url: images.feature4,
   },
   {
-    id: 26865,
+    id: 6513,
     title: 'Man T-Shirt',
     price: '$44.00',
     url: images.feature5,
   },
   {
-    id: 39542,
+    id: 4113,
     title: 'Woman T-Shirt',
     price: '$34.00',
     url: images.feature3,

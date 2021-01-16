@@ -31,4 +31,18 @@ export default styles = StyleSheet.create({
     marginBottom: 62,
     alignSelf: 'flex-start',
   },
+  iconStyle: {
+    width: 18.32,
+    height: 12.5,
+  },
+  backBtnIcon: {
+    width: 22,
+    height: 9.93,
+  },
+  btnStyle: {
+    marginTop: 30,
+  },
+  signupTxt: {
+    color: '#A6A6A6',
+  },
 });

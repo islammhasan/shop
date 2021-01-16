@@ -1,53 +1,44 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  Image,
-  FlatList,
-} from 'react-native';
+import {View, Text, TouchableOpacity, Image, FlatList} from 'react-native';
 import {images} from '../../assets';
 import {Header} from '../../components/Header';
 import styles from './style';
 
 export const Featured = () => {
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Header hasSearch hasCart />
-      <View
-        style={{
-          width: 343,
-          padding: 5,
-          marginTop: 20,
-          flex: 1,
-        }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
-          <Text style={{fontSize: 30}}>Featured</Text>
-        </View>
-        <FlatList
-          data={featureData}
-          contentContainerStyle={{alignItems: 'center', paddingVertical: 30}}
-          numColumns={2}
-          ItemSeparatorComponent={() => <View style={{height: 20}}></View>}
-          renderItem={({item}) => (
-            <TouchableOpacity
-              activeOpacity={0.8}
-              horizontal={false}
-              style={{paddingHorizontal: 13}}>
-              <Image style={{width: 140, height: 180, borderRadius: 5}} source={item.url} />
-              <Text style={{fontSize: 16, marginTop: 11}}>{item.price}</Text>
-              <Text style={{fontSize: 16, marginTop: 7}}>{item.title}</Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <Header
+        hasBack
+        hasSearch
+        hasCart
+        onBackPress={() => alert('onBackPress')}
+        onCartPress={() => alert('onCartPress')}
+        onSearchPress={() => alert('onSearchPress')}
+      />
+
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={featureData}
+        ListHeaderComponent={<Text style={styles.labelStyle}>Featured</Text>}
+        ListHeaderComponentStyle={styles.labelStylePositioning}
+        contentContainerStyle={styles.listContainerStyle}
+        numColumns={2}
+        renderItem={({item}) => (
+          <TouchableOpacity
+            onPress={() => {
+              alert('Product details: ' + item.title);
+            }}
+            activeOpacity={0.8}
+            horizontal={false}
+            style={styles.itemContainerStyle}>
+            <Image style={styles.itemImageStyle} source={item.url} />
+            <Text style={styles.itemPriceStyle}>{item.price}</Text>
+            <Text style={styles.itemTitleStyle}>{item.title}</Text>
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
   );
 };
 
@@ -66,7 +57,7 @@ const featureData = [
   },
   {
     id: 39849,
-    title: 'Man T-Shirt',
+    title: 'Woman T-Shirt',
     price: '$43.00',
     url: images.feature3,
   },

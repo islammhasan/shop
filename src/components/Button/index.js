@@ -1,14 +1,31 @@
 import React from 'react';
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 import {colors} from '../../assets';
 
 export const Button = (props) => {
-  const {isLargeButton, title, customStyle} = props;
+  const {isLargeButton, title, customStyle, isLoading, disableBtn} = props;
   return (
     <TouchableOpacity
+      disabled={disableBtn}
       activeOpacity={0.8}
-      style={[styles.container, {width: isLargeButton ? 400 : 245}, customStyle]}
+      style={[
+        styles.container,
+        {width: isLargeButton ? 400 : 245},
+        customStyle,
+      ]}
       {...props}>
+      {isLoading && (
+        <ActivityIndicator
+          style={styles.indicatorStyle}
+          size="small"
+          color="#fff"
+        />
+      )}
       <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
   );
@@ -32,5 +49,10 @@ const styles = StyleSheet.create({
   title: {
     color: colors.white,
     fontSize: 16,
+  },
+  indicatorStyle: {
+    position: 'absolute',
+    start: 0,
+    marginStart: 20,
   },
 });

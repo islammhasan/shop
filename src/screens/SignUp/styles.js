@@ -31,4 +31,8 @@ export default styles = StyleSheet.create({
     marginBottom: 62,
     alignSelf: 'flex-start',
   },
+  backBtnIcon: {
+    width: 22,
+    height: 9.93,
+  },
 });

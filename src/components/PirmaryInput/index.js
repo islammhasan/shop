@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
   Image,
   View,
@@ -15,12 +15,7 @@ export const PrimaryInput = (props) => {
     <View style={styles.container}>
       <Text style={styles.labelStyle}>{text}</Text>
       <View style={{flexDirection: 'row'}}>
-        <TextInput
-          {...props}
-          style={{
-            flex: 1,
-          }}
-        />
+        <TextInput {...props} style={styles.textInputStyle} />
         {rightIcon && (
           <TouchableOpacity
             onPress={onPress}
@@ -48,7 +43,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   labelStyle: {
-    // position: 'absolute',
+    position: 'absolute',
     top: 0,
     start: 0,
     color: colors.gray,
@@ -59,8 +54,12 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     width: 40,
-    height: 40,
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
+    paddingTop: 10,
+  },
+  textInputStyle: {
+    flex: 1,
+    paddingBottom: 0,
   },
 });

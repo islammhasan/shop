@@ -1,34 +1,49 @@
 import {StyleSheet} from 'react-native';
 
 export default styles = StyleSheet.create({
-  container: {
+  firstLevelContainer: {
     flex: 1,
-    paddingTop: 15,
-
-    // alignItems: 'center',
   },
-  searchBar: {
+  container: {
+    paddingBottom: 30,
+  },
+  listComponentStyle: {
+    paddingStart: 16.5,
     marginTop: 15,
-    alignSelf: 'center',
-    // width: 343,
-    marginHorizontal: 16.5,
-    height: 52,
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    alignItems: 'center',
-    elevation: 7,
-    shadowOffset: {
-      width: 2,
-      height: 2,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 6,
-    borderRadius: 8,
   },
-  searchIcon: {
-    width: 50,
-    height: 30,
+  listLabel: {
+    fontSize: 22,
+  },
+  seeAllLabel: {
+    fontSize: 14,
+    marginEnd: 16.5,
+  },
+  listSpacing: {
+    paddingTop: 20,
+  },
+  listComponentLabelsStyle: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'center',
+  },
+  listItemContainer: {
+    marginEnd: 20,
+  },
+  catListItemImage: {
+    width: 114,
+    height: 65,
+  },
+  itemComponentImage: {
+    width: 150,
+    height: 180,
+    borderRadius: 5,
+  },
+  itemPrice: {
+    fontSize: 16,
+    marginTop: 11,
+  },
+  itemTitle: {
+    fontSize: 16,
+    marginTop: 7,
   },
 });
