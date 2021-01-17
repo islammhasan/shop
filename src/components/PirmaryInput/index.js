@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Image,
   View,
@@ -10,12 +10,18 @@ import {
 import {colors} from '../../assets/colors';
 
 export const PrimaryInput = (props) => {
+  const [isFocused, setIsFocused] = useState(false);
   const {text, passwordInput, rightIcon, rightIconStyle, onPress} = props;
   return (
-    <View style={styles.container}>
+    <View style={isFocused ? styles.containerFocused : styles.container}>
       <Text style={styles.labelStyle}>{text}</Text>
       <View style={{flexDirection: 'row'}}>
-        <TextInput {...props} style={styles.textInputStyle} />
+        <TextInput
+          onFocus={() => setIsFocused(!isFocused)}
+          onBlur={() => setIsFocused(!isFocused)}
+          {...props}
+          style={styles.textInputStyle}
+        />
         {rightIcon && (
           <TouchableOpacity
             onPress={onPress}
@@ -39,6 +45,14 @@ const styles = StyleSheet.create({
     height: 57.5,
     borderBottomWidth: 1,
     borderBottomColor: '#DADADA',
+    justifyContent: 'space-around',
+    marginBottom: 25,
+  },
+  containerFocused: {
+    width: 327,
+    height: 57.5,
+    borderBottomWidth: 1,
+    borderBottomColor: '#00BFFF',
     justifyContent: 'space-around',
     marginBottom: 25,
   },

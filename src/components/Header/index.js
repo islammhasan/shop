@@ -2,6 +2,10 @@ import React from 'react';
 import {View, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {images} from '../../assets';
 import {windowWidth} from '../../config';
+import {Cart} from '../Cart';
+import {FilterComponent} from '../FilterComponent';
+import {Search} from '../Search';
+import {MenuComponent} from '../MenuComponent';
 
 export const Header = (props) => {
   const {
@@ -18,15 +22,7 @@ export const Header = (props) => {
   } = props;
   return (
     <View style={styles.headerStyle}>
-      {hasMenu && (
-        <TouchableOpacity onPress={onMenuPress} style={styles.iconContainer}>
-          <Image
-            source={images.menu}
-            resizeMode="contain"
-            style={styles.menuIconStyle}
-          />
-        </TouchableOpacity>
-      )}
+      {hasMenu && <MenuComponent onMenuPress={onMenuPress} />}
       {hasBack && (
         <TouchableOpacity onPress={onBackPress} style={styles.iconContainer}>
           <Image
@@ -37,37 +33,9 @@ export const Header = (props) => {
         </TouchableOpacity>
       )}
       <View style={styles.rightIconsContainer}>
-        {hasSearch && (
-          <TouchableOpacity
-            onPress={onSearchPress}
-            style={styles.rightIconStyle}>
-            <Image
-              source={images.search}
-              resizeMode="contain"
-              style={styles.defaultIconStyle}
-            />
-          </TouchableOpacity>
-        )}
-        {hasCart && (
-          <TouchableOpacity onPress={onCartPress} style={styles.rightIconStyle}>
-            <Image
-              source={images.cart}
-              resizeMode="contain"
-              style={styles.defaultIconStyle}
-            />
-          </TouchableOpacity>
-        )}
-        {hasFilter && (
-          <TouchableOpacity
-            onPress={onFilterPress}
-            style={styles.rightIconStyle}>
-            <Image
-              source={images.filter}
-              resizeMode="contain"
-              style={styles.defaultIconStyle}
-            />
-          </TouchableOpacity>
-        )}
+        {hasSearch && <Search onSearchPress={onSearchPress} />}
+        {hasCart && <Cart onCartPress={onCartPress} />}
+        {hasFilter && <FilterComponent onFilterPress={onFilterPress} />}
       </View>
     </View>
   );
@@ -81,21 +49,10 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   iconContainer: {
-    // width: 60,
-    // height: 30,
     paddingStart: 25,
     paddingEnd: 10,
-    // paddingBottom:10,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  defaultIconStyle: {
-    width: 20,
-    height: 20,
-  },
-  menuIconStyle: {
-    width: 20,
-    height: 16,
   },
   backIconStyle: {
     width: 22,
@@ -103,11 +60,5 @@ const styles = StyleSheet.create({
   },
   rightIconsContainer: {
     flexDirection: 'row',
-    // alignItems: 'center',
-    // width: 70,
-    // justifyContent: 'space-between',
-  },
-  rightIconStyle: {
-    paddingEnd: 20,
   },
 });

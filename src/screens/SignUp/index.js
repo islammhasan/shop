@@ -9,7 +9,9 @@ export const SignUp = () => {
   const [showIndicator, setShowIndicator] = useState(false);
   return (
     <ScrollView contentContainerStyle={styles.contentStyle}>
-      <TouchableOpacity style={styles.backBtn}>
+      <TouchableOpacity
+        onPress={() => alert('Back Pressed!')}
+        style={styles.backBtn}>
         <Image
           source={images.back}
           resizeMode="contain"
@@ -17,7 +19,6 @@ export const SignUp = () => {
         />
       </TouchableOpacity>
       <Text style={styles.headerText}>Signup</Text>
-
       <PrimaryInput text={'Name'} />
       <PrimaryInput text={'Email'} />
       <PrimaryInput
@@ -28,7 +29,6 @@ export const SignUp = () => {
         text={'Password'}
         onPress={() => setShowPassword(!showPassword)}
       />
-
       <Button
         customStyle={{marginTop: 30}}
         title="Sign up"
@@ -37,7 +37,10 @@ export const SignUp = () => {
         disableBtn={showIndicator}
         onPress={() => setShowIndicator(!showIndicator)}
       />
-      <TouchableOpacity activeOpacity={0.8} style={styles.signupButton}>
+      <TouchableOpacity
+        onPress={() => alert('Sign in!')}
+        activeOpacity={0.8}
+        style={styles.signupButton}>
         <Text style={{color: '#A6A6A6'}}>
           Already have an account?
           <Text style={styles.signup}> Sign in</Text>
