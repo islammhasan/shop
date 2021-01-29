@@ -1,15 +1,21 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../assets';
 
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 20,
   },
-  wrapper: {},
+  wrapper: {
+    // backgroundColor:'red',
+    // width:326.5,
+    // height:175,
+    // paddingHorizontal:40
+  },
   slide1: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB',
+    // width:326.5,
+    // height:175,
   },
   slide2: {
     flex: 1,
@@ -37,8 +43,10 @@ export default styles = StyleSheet.create({
   productTitle: {
     marginTop: 25,
     fontSize: 25,
+    color: colors.black,
   },
   priceContainer: {
+    maxWidth: 300,
     flexDirection: 'row',
     marginTop: 10,
     alignItems: 'center',
@@ -63,20 +71,21 @@ export default styles = StyleSheet.create({
     alignItems: 'center',
   },
   ratingContainerEnd: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    // flex: 1,
+    // flexDirection: 'row',
+    // justifyContent: 'flex-end',
   },
   rating: {
     backgroundColor: '#667EEA',
     borderRadius: 5,
     width: 65,
     height: 35,
-    color: '#ffffff',
-    textAlign: 'center',
-    textAlignVertical: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 5,
   },
   ratingTitle: {
+    flex: 1,
     fontSize: 18,
     color: '#2A2A2A',
     marginStart: 16,
@@ -85,6 +94,7 @@ export default styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     color: '#667EEA',
+    maxWidth: 100,
   },
   descriptionTitle: {
     fontSize: 16,
@@ -104,7 +114,7 @@ export default styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buyNowText: {
-      fontSize: 20,
-      color: '#ffffff'
-  }
+    fontSize: 20,
+    color: '#ffffff',
+  },
 });
