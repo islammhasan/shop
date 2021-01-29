@@ -15,4 +15,5 @@ export const images = {
   feature3: require('./feature3.png'),
   feature4: require('./feature4.png'),
   feature5: require('./feature5.png'),
+  slide1: require('./slide1.png'),
 };
