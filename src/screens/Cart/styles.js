@@ -98,16 +98,10 @@ export default styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   btnStyle: {
-    backgroundColor: colors.main,
     marginHorizontal: 24,
     height: 55,
-    alignItems: 'center',
-    justifyContent: 'center',
     borderRadius: 5,
     bottom: 17,
-  },
-  btnText: {
-    color: colors.white,
-    fontSize: 20,
+    width: null,
   },
 });

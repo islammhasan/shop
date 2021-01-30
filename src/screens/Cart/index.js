@@ -10,9 +10,10 @@ import {
 import {Header} from '../../components/Header';
 import {Button} from '../../components/Button';
 import styles from './styles';
-import {colors, images} from '../../assets';
+import {images} from '../../assets';
 
 export const Cart = () => {
+  const [showIndicator, setShowIndicator] = useState(false);
   const [counter, setCounter] = useState(1);
   return (
     <View style={styles.container}>
@@ -69,9 +70,13 @@ export const Cart = () => {
           item.id;
         }}
       />
-      <TouchableOpacity onPress={() => alert('Continue shopping!')} activeOpacity={0.8} style={styles.btnStyle}>
-        <Text style={styles.btnText}>Continue</Text>
-      </TouchableOpacity>
+      <Button
+        customStyle={styles.btnStyle}
+        title="Continue"
+        isLoading={showIndicator}
+        disableBtn={showIndicator}
+        onPress={() => setShowIndicator(!showIndicator)}
+      />
     </View>
   );
 };
