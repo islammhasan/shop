@@ -30,22 +30,27 @@ export const ItemDetails = () => {
         onCartPress={() => alert('onCartPress')}
         onSearchPress={() => alert('onSearchPress')}
       />
-      <ScrollView
-        contentContainerStyle={{
-          paddingHorizontal: 22,
-        }}>
-        {/* <Swiper
-          autoplay
+      <ScrollView contentContainerStyle={styles.sView}>
+        <Swiper
+          height={175}
           style={styles.wrapper}
+          dotColor={'#ffffff'}
+          activeDotColor={'#667EEA'}
           paginationStyle={styles.paginationStyle}>
-          <View style={styles.slide1}> */}
-        <Image
-          source={images.slide1}
-          resizeMode={'cover'}
-          style={{width: '100%', height: 175}}
-        />
-        {/* </View> */}
-        {/* </Swiper> */}
+          <View style={styles.slide1}>
+            <Image
+              source={images.slide1}
+              resizeMode={'cover'}
+              style={styles.slideImage}
+            />
+          </View>
+          <View style={styles.slide2}>
+            <Text style={styles.text}>Beautiful</Text>
+          </View>
+          <View style={styles.slide3}>
+            <Text style={styles.text}>And simple</Text>
+          </View>
+        </Swiper>
         <Text numberOfLines={3} style={styles.productTitle}>
           Black trutleneck top
         </Text>
@@ -55,16 +60,9 @@ export const ItemDetails = () => {
             {special_price && <Text style={styles.discount}>${price}</Text>}
           </View>
         )}
-
         <View style={styles.ratingContainer}>
           <View style={styles.rating}>
-            <Text
-              style={{
-                color: '#ffffff',
-                fontSize: 18,
-              }}>
-              4.5
-            </Text>
+            <Text style={styles.ratingText}>4.5</Text>
           </View>
           <Text numberOfLines={1} style={styles.ratingTitle}>
             Very Good
@@ -86,25 +84,28 @@ export const ItemDetails = () => {
           }>
           <Text>{numOfLines == 3 ? 'More' : 'Less'}</Text>
         </TouchableOpacity>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginVertical: 10,
-          }}>
-          <TouchableOpacity onPress={() => setSwitchTabs(true)}>
-            <Text>Select Size</Text>
+        <View style={styles.variationTabs}>
+          <TouchableOpacity
+            style={styles.tab}
+            onPress={() => setSwitchTabs(true)}>
+            <Text style={[styles.tabText, switchTabs && styles.activeTab]}>
+              Select Size
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => setSwitchTabs(false)}>
-            <Text>Select Color</Text>
+          <TouchableOpacity
+            style={styles.tab}
+            onPress={() => setSwitchTabs(false)}>
+            <Text style={[styles.tabText, !switchTabs && styles.activeTab]}>
+              Select Color
+            </Text>
           </TouchableOpacity>
         </View>
 
         {switchTabs ? (
           <FlatList
             data={sizes}
+            contentContainerStyle={styles.tabsContent}
+            showsHorizontalScrollIndicator={false}
             renderItem={({item}) => {
               const {size, id} = item;
               const isSelected = selectedSize == id;
@@ -115,15 +116,25 @@ export const ItemDetails = () => {
                   style={{
                     width: 60,
                     height: 60,
-                    borderRadius: 8,
+                    borderRadius: 3,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: isSelected ? colors.main : colors.gray,
-                    marginEnd: 2,
+                    backgroundColor: isSelected ? colors.main : '#F3F3F3',
+                    marginEnd: 10,
+                    shadowOffset: {
+                      width: 2,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.5,
+                    shadowRadius: 3,
+                    elevation: 3,
                   }}>
                   <Text
-                    style={{color: isSelected ? colors.white : colors.black}}>
-                    {size}
+                    style={{
+                      color: isSelected ? colors.white : colors.black,
+                      fontSize: 16,
+                    }}>
+                    {size.toUpperCase()}
                   </Text>
                 </TouchableOpacity>
               );
@@ -134,6 +145,8 @@ export const ItemDetails = () => {
         ) : (
           <FlatList
             data={_colors}
+            contentContainerStyle={styles.tabsContent}
+            showsHorizontalScrollIndicator={false}
             renderItem={({item}) => {
               const {color, id} = item;
               const isSelected = selectedColor == id;
@@ -144,14 +157,24 @@ export const ItemDetails = () => {
                   style={{
                     width: 60,
                     height: 60,
-                    borderRadius: 8,
+                    borderRadius: 3,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: isSelected ? colors.main : colors.gray,
-                    marginEnd: 2,
+                    backgroundColor: isSelected ? colors.main : '#F3F3F3',
+                    marginEnd: 10,
+                    shadowOffset: {
+                      width: 2,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.5,
+                    shadowRadius: 3,
+                    elevation: 3,
                   }}>
                   <Text
-                    style={{color: isSelected ? colors.white : colors.black}}>
+                    style={{
+                      color: isSelected ? colors.white : colors.black,
+                      fontSize: 16,
+                    }}>
                     {color}
                   </Text>
                 </TouchableOpacity>
@@ -162,13 +185,20 @@ export const ItemDetails = () => {
           />
         )}
       </ScrollView>
-
-      <TouchableOpacity
-        onPress={() => alert('Buy Now')}
-        activeOpacity={0.8}
-        style={styles.buyNow}>
-        <Text style={styles.buyNowText}>BUY NOW</Text>
-      </TouchableOpacity>
+      <View style={styles.bottomBtns}>
+        <TouchableOpacity
+          onPress={() => alert('Add to cart')}
+          activeOpacity={0.8}
+          style={styles.addToCart}>
+          <Text style={styles.addToCartText}>ADD TO CART</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => alert('Buy Now')}
+          activeOpacity={0.8}
+          style={styles.buyNow}>
+          <Text style={styles.buyNowText}>BUY NOW</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -177,9 +207,9 @@ const sizes = [
   {id: 1, size: 's'},
   {id: 2, size: 'm'},
   {id: 3, size: 'l'},
-  {id: 4, size: 'x'},
-  {id: 5, size: 'xx'},
-  {id: 6, size: 'xxx'},
+  {id: 4, size: 'xl'},
+  {id: 5, size: 'xxl'},
+  {id: 6, size: 'xxxl'},
 ];
 
 const _colors = [

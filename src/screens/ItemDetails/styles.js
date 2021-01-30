@@ -1,22 +1,21 @@
 import {StyleSheet} from 'react-native';
 import {colors} from '../../assets';
+import {Platform} from 'react-native';
 
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
+    marginTop: Platform.os == 'ios' ? 20 : 0,
   },
-  wrapper: {
-    // backgroundColor:'red',
-    // width:326.5,
-    // height:175,
-    // paddingHorizontal:40
+  wrapper: {},
+  slideImage: {
+    width: '100%',
+    height: 175,
   },
-  slide1: {
-    flex: 1,
-    // width:326.5,
-    // height:175,
+  sView: {
+    paddingHorizontal: 24,
   },
+  slide1: {},
   slide2: {
     flex: 1,
     justifyContent: 'center',
@@ -63,17 +62,17 @@ export default styles = StyleSheet.create({
   },
   ratingContainer: {
     flexDirection: 'row',
-    marginTop: 34,
+    height: 56,
+    marginTop: 23,
     alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: '#F3F3F3',
+    borderBottomWidth: 1,
+    borderBottomColor: '#F3F3F3',
   },
-  ratingContainerStart: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  ratingContainerEnd: {
-    // flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'flex-end',
+  ratingText: {
+    color: '#ffffff',
+    fontSize: 18,
   },
   rating: {
     backgroundColor: '#667EEA',
@@ -112,9 +111,50 @@ export default styles = StyleSheet.create({
     height: 55,
     alignItems: 'center',
     justifyContent: 'center',
+    width: '50%',
+  },
+  addToCart: {
+    backgroundColor: '#E1E1E1',
+    height: 55,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '50%',
   },
   buyNowText: {
     fontSize: 20,
     color: '#ffffff',
+  },
+  addToCartText: {
+    fontSize: 20,
+    color: '#2A2A2A',
+  },
+  variationTabs: {
+    flexDirection: 'row',
+    height: 60,
+    width: '100%',
+    marginTop: 25,
+    borderTopWidth: 1,
+    borderTopColor: '#F3F3F3',
+    borderBottomWidth: 1,
+    borderBottomColor: '#F3F3F3',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  tab: {
+    padding: 20,
+  },
+  tabsContent: {
+    paddingVertical: 25,
+    paddingStart: 5,
+  },
+  tabText: {
+    fontSize: 18,
+    color: '#2A2A2A',
+  },
+  activeTab: {
+    fontWeight: '700',
+  },
+  bottomBtns: {
+    flexDirection: 'row',
   },
 });
