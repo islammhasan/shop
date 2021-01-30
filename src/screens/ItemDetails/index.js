@@ -36,8 +36,8 @@ export const ItemDetails = () => {
         <Swiper
           height={175}
           style={styles.wrapper}
-          dotColor={'#ffffff'}
-          activeDotColor={'#667EEA'}
+          dotColor={colors.white}
+          activeDotColor={colors.main}
           paginationStyle={styles.paginationStyle}>
           {_Images.map((item) => {
             return (
