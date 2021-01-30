@@ -29,7 +29,7 @@ export default styles = StyleSheet.create({
     backgroundColor: '#92BBD9',
   },
   text: {
-    color: '#fff',
+    color: colors.white,
     fontSize: 30,
     fontWeight: 'bold',
   },
@@ -52,11 +52,11 @@ export default styles = StyleSheet.create({
   },
   price: {
     fontSize: 20,
-    color: '#667EEA',
+    color: colors.main,
     marginEnd: 17.5,
   },
   discount: {
-    color: '#2A2A2A',
+    color: colors.black,
     fontSize: 13,
     textDecorationLine: 'line-through',
   },
@@ -71,11 +71,11 @@ export default styles = StyleSheet.create({
     borderBottomColor: '#F3F3F3',
   },
   ratingText: {
-    color: '#ffffff',
+    color: colors.white,
     fontSize: 18,
   },
   rating: {
-    backgroundColor: '#667EEA',
+    backgroundColor: colors.main,
     borderRadius: 5,
     width: 65,
     height: 35,
@@ -86,28 +86,28 @@ export default styles = StyleSheet.create({
   ratingTitle: {
     flex: 1,
     fontSize: 18,
-    color: '#2A2A2A',
+    color: colors.black,
     marginStart: 16,
   },
   reviews: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: '#667EEA',
+    color: colors.main,
     maxWidth: 100,
   },
   descriptionTitle: {
     fontSize: 16,
-    color: '#2A2A2A',
+    color: colors.black,
     marginTop: 15.5,
   },
   description: {
     fontSize: 14,
-    color: '#656565',
+    color: colors.text,
     marginTop: 11,
     lineHeight: 23,
   },
   buyNow: {
-    backgroundColor: '#667EEA',
+    backgroundColor: colors.main,
     height: 55,
     alignItems: 'center',
     justifyContent: 'center',
@@ -122,11 +122,11 @@ export default styles = StyleSheet.create({
   },
   buyNowText: {
     fontSize: 20,
-    color: '#ffffff',
+    color: colors.white,
   },
   addToCartText: {
     fontSize: 20,
-    color: '#2A2A2A',
+    color: colors.black,
   },
   variationTabs: {
     flexDirection: 'row',
@@ -149,7 +149,7 @@ export default styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 18,
-    color: '#2A2A2A',
+    color: colors.black,
   },
   activeTab: {
     fontWeight: '700',

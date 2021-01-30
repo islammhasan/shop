@@ -15,6 +15,8 @@ import {colors, images} from '../../assets';
 export const ItemDetails = () => {
   const price = 50;
   const special_price = 20;
+  const descriptionData =
+    'A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine.';
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [switchTabs, setSwitchTabs] = useState(true);
@@ -39,9 +41,8 @@ export const ItemDetails = () => {
           paginationStyle={styles.paginationStyle}>
           {_Images.map((item) => {
             return (
-              <View style={styles.slide1}>
+              <View key={item.id} style={styles.slide1}>
                 <Image
-                  key={item.id}
                   source={item.url}
                   resizeMode={'cover'}
                   style={styles.slideImage}
@@ -72,10 +73,7 @@ export const ItemDetails = () => {
         </View>
         <Text style={styles.descriptionTitle}>Description</Text>
         <Text numberOfLines={numOfLines} style={styles.description}>
-          A wonderful serenity has taken possession of my entire soul, like
-          these sweet mornings of spring which I enjoy with my whole heart. I am
-          alone, and feel the charm of existence in this spot, which was created
-          for the bliss of souls like mine.
+          {descriptionData}
         </Text>
         <TouchableOpacity
           onPress={() =>
@@ -126,7 +124,7 @@ export const ItemDetails = () => {
                 </TouchableOpacity>
               );
             }}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             horizontal
           />
         ) : (
@@ -155,7 +153,7 @@ export const ItemDetails = () => {
                 </TouchableOpacity>
               );
             }}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             horizontal
           />
         )}
