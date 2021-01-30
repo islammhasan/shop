@@ -37,19 +37,18 @@ export const ItemDetails = () => {
           dotColor={'#ffffff'}
           activeDotColor={'#667EEA'}
           paginationStyle={styles.paginationStyle}>
-          <View style={styles.slide1}>
-            <Image
-              source={images.slide1}
-              resizeMode={'cover'}
-              style={styles.slideImage}
-            />
-          </View>
-          <View style={styles.slide2}>
-            <Text style={styles.text}>Beautiful</Text>
-          </View>
-          <View style={styles.slide3}>
-            <Text style={styles.text}>And simple</Text>
-          </View>
+          {_Images.map((item) => {
+            return (
+              <View style={styles.slide1}>
+                <Image
+                  key={item.id}
+                  source={item.url}
+                  resizeMode={'cover'}
+                  style={styles.slideImage}
+                />
+              </View>
+            );
+          })}
         </Swiper>
         <Text numberOfLines={3} style={styles.productTitle}>
           Black trutleneck top
@@ -195,4 +194,19 @@ const _colors = [
   {id: 4, color: 'yellow'},
   {id: 5, color: 'black'},
   {id: 6, color: 'white'},
+];
+
+const _Images = [
+  {
+    id: 1,
+    url: images.slide1,
+  },
+  {
+    id: 2,
+    url: images.slide2,
+  },
+  {
+    id: 3,
+    url: images.slide3,
+  },
 ];
