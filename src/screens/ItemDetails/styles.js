@@ -5,7 +5,7 @@ import {Platform} from 'react-native';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Platform.os == 'ios' ? 20 : 0,
+    marginTop: Platform.OS == 'ios' ? 20 : 0,
   },
   wrapper: {},
   slideImage: {
@@ -156,5 +156,21 @@ export default styles = StyleSheet.create({
   },
   bottomBtns: {
     flexDirection: 'row',
+  },
+  list: {
+    width: 60,
+    height: 60,
+    borderRadius: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F3F3F3',
+    marginEnd: 10,
+    shadowOffset: {
+      width: 0.5,
+      height: 0.5,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 1,
+    elevation: 3,
   },
 });

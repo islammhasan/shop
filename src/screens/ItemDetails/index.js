@@ -113,22 +113,10 @@ export const ItemDetails = () => {
                 <TouchableOpacity
                   onPress={() => setSelectedSize(id)}
                   activeOpacity={0.8}
-                  style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: 3,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: isSelected ? colors.main : '#F3F3F3',
-                    marginEnd: 10,
-                    shadowOffset: {
-                      width: 2,
-                      height: 2,
-                    },
-                    shadowOpacity: 0.5,
-                    shadowRadius: 3,
-                    elevation: 3,
-                  }}>
+                  style={[
+                    styles.list,
+                    isSelected && {backgroundColor: colors.main},
+                  ]}>
                   <Text
                     style={{
                       color: isSelected ? colors.white : colors.black,
@@ -154,22 +142,10 @@ export const ItemDetails = () => {
                 <TouchableOpacity
                   onPress={() => setSelectedColor(id)}
                   activeOpacity={0.8}
-                  style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: 3,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: isSelected ? colors.main : '#F3F3F3',
-                    marginEnd: 10,
-                    shadowOffset: {
-                      width: 2,
-                      height: 2,
-                    },
-                    shadowOpacity: 0.5,
-                    shadowRadius: 3,
-                    elevation: 3,
-                  }}>
+                  style={[
+                    styles.list,
+                    isSelected && {backgroundColor: colors.main},
+                  ]}>
                   <Text
                     style={{
                       color: isSelected ? colors.white : colors.black,
