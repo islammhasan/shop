@@ -3,7 +3,7 @@
  */
 
 import { AppRegistry } from 'react-native';
-import { ItemDetails } from './src/screens/ItemDetails';
+import { Cart } from './src/screens/Cart';
 import { name as appName } from './app.json';
 
-AppRegistry.registerComponent(appName, () => ItemDetails);
+AppRegistry.registerComponent(appName, () => Cart);
