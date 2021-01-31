@@ -8,7 +8,14 @@ import {
 import {colors} from '../../assets';
 
 export const Button = (props) => {
-  const {isLargeButton, title, customStyle, isLoading, disableBtn} = props;
+  const {
+    isLargeButton,
+    title,
+    customStyle,
+    isLoading,
+    disableBtn,
+    textCustomStyle,
+  } = props;
   return (
     <TouchableOpacity
       disabled={disableBtn}
@@ -26,7 +33,7 @@ export const Button = (props) => {
           color="#fff"
         />
       )}
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title, textCustomStyle]}>{title}</Text>
     </TouchableOpacity>
   );
 };
