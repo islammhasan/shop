@@ -21,4 +21,5 @@ export const images = {
   remove: require('./cancel.png'),
   visa: require('./visa.png'),
   confirm: require('./confirm.png'),
+  close: require('./close.png'),
 };
