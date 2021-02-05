@@ -16,8 +16,10 @@ export const styles = StyleSheet.create({
   },
   closeContainerStyle: {
     position: 'absolute',
-    width: 29,
-    height: 29,
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    width: 40,
+    height: 40,
     bottom: 64,
     end: 37,
   },
