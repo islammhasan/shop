@@ -33,7 +33,9 @@ export const Button = (props) => {
           color="#fff"
         />
       )}
-      <Text style={[styles.title, textCustomStyle]}>{title}</Text>
+      <Text numberOfLines={1} style={[styles.title, textCustomStyle]}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };
@@ -42,6 +44,7 @@ const styles = StyleSheet.create({
   container: {
     height: 48,
     backgroundColor: colors.main,
+    paddingHorizontal: 5,
     borderRadius: 6,
     justifyContent: 'center',
     alignItems: 'center',

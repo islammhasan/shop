@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native';
-import {Favorite} from './src/screens/Favorite';
+import {MyOrders} from './src/screens/MyOrders';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => Favorite);
+AppRegistry.registerComponent(appName, () => MyOrders);
