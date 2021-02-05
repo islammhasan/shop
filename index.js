@@ -3,7 +3,7 @@
  */
 
 import {AppRegistry} from 'react-native';
-import {Checkout} from './src/screens/Checkout';
+import {Confirmation} from './src/screens/Confirmation';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => Checkout);
+AppRegistry.registerComponent(appName, () => Confirmation);

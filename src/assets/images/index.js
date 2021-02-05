@@ -20,4 +20,5 @@ export const images = {
   slide3: require('./slide3.jpg'),
   remove: require('./cancel.png'),
   visa: require('./visa.png'),
+  confirm: require('./confirm.png'),
 };
