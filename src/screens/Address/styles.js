@@ -1,11 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {colors} from '../../assets';
-import {Platform} from 'react-native';
 
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Platform.OS == 'ios' ? 20 : 0,
   },
   screenTitle: {
     color: colors.black,

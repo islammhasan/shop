@@ -11,9 +11,21 @@ import {colors} from '../../assets/colors';
 
 export const PrimaryInput = (props) => {
   const [isFocused, setIsFocused] = useState(false);
-  const {text, passwordInput, rightIcon, rightIconStyle, onPress} = props;
+  const {
+    text,
+    passwordInput,
+    rightIcon,
+    rightIconStyle,
+    onPress,
+    customStyle,
+  } = props;
   return (
-    <View style={isFocused ? styles.containerFocused : styles.container}>
+    <View
+      style={[
+        styles.container,
+        isFocused && styles.containerFocused,
+        customStyle,
+      ]}>
       <Text style={styles.labelStyle}>{text}</Text>
       <View style={{flexDirection: 'row'}}>
         <TextInput
@@ -41,20 +53,15 @@ export const PrimaryInput = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 327,
     height: 57.5,
     borderBottomWidth: 1,
     borderBottomColor: '#DADADA',
     justifyContent: 'space-around',
     marginBottom: 25,
+    marginHorizontal: 25,
   },
   containerFocused: {
-    width: 327,
-    height: 57.5,
-    borderBottomWidth: 1,
     borderBottomColor: '#00BFFF',
-    justifyContent: 'space-around',
-    marginBottom: 25,
   },
   labelStyle: {
     position: 'absolute',

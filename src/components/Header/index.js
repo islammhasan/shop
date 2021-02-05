@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 import {images} from '../../assets';
 import {windowWidth} from '../../config';
 import {Cart} from '../Cart';
@@ -19,9 +25,10 @@ export const Header = (props) => {
     hasCart,
     hasMenu,
     hasBack,
+    customStyle,
   } = props;
   return (
-    <View style={styles.headerStyle}>
+    <View style={[styles.headerStyle, customStyle]}>
       {hasMenu && <MenuComponent onMenuPress={onMenuPress} />}
       {hasBack && (
         <TouchableOpacity onPress={onBackPress} style={styles.iconContainer}>
@@ -47,6 +54,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingVertical: 20,
+    marginTop: Platform.OS == 'ios' ? 20 : 0,
   },
   iconContainer: {
     paddingStart: 25,

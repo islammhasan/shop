@@ -9,13 +9,13 @@ export const Address = () => {
   const [showIndicator, setShowIndicator] = useState(false);
   return (
     <>
+      <Header
+        hasBack
+        hasSearch
+        onBackPress={() => alert('onBackPress')}
+        onSearchPress={() => alert('onSearchPress')}
+      />
       <View style={styles.container}>
-        <Header
-          hasBack
-          hasSearch
-          onBackPress={() => alert('onBackPress')}
-          onSearchPress={() => alert('onSearchPress')}
-        />
         <Text style={styles.screenTitle}>Address</Text>
         <FlatList
           data={ADDRESSES}
