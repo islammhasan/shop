@@ -4,7 +4,7 @@ import {colors} from '../../assets/colors';
 export default styles = StyleSheet.create({
   contentStyle: {
     paddingTop: 30,
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   signupButton: {
     marginTop: 10,
@@ -41,6 +41,7 @@ export default styles = StyleSheet.create({
   },
   btnStyle: {
     marginTop: 30,
+    alignSelf: 'center',
   },
   signupTxt: {
     color: '#A6A6A6',
