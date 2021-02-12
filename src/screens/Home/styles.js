@@ -45,5 +45,6 @@ export default styles = StyleSheet.create({
   itemTitle: {
     fontSize: 16,
     marginTop: 7,
+    maxWidth:114
   },
 });

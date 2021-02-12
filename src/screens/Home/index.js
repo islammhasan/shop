@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useState} from 'react';
 import {
   View,
   Text,
@@ -6,13 +7,68 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
-import {images} from '../../assets';
+import {colors, images} from '../../assets';
 import {Header} from '../../components/Header';
 import {SearchBar} from '../../components/SearchBar';
 import styles from './styles';
 
 export const Home = () => {
+  const [categories, setCategories] = useState([]);
+  const [featureData, setFeatureData] = useState([]);
+  const [bestSellData, setBestSellData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    initialFetch();
+  }, []);
+
+  const initialFetch = async () => {
+    await getCategories();
+    await getFeatureProducts();
+    await getBestSellProducts();
+    setLoading(false);
+  };
+  const getFeatureProducts = async () => {
+    try {
+      await fetch('https://fakestoreapi.com/products?limit=5')
+        .then((res) => res.json())
+        .then((json) => setFeatureData(json))
+        .catch((e) => console.warn('e', e));
+    } catch (error) {
+      console.warn('error', error);
+    }
+  };
+  const getBestSellProducts = async () => {
+    try {
+      await fetch('https://fakestoreapi.com/products/category/jewelery')
+        .then((res) => res.json())
+        .then((json) => setBestSellData(json))
+        .catch((e) => console.warn('e', e));
+    } catch (error) {
+      console.warn('error', error);
+    }
+  };
+  const getCategories = async () => {
+    try {
+      await fetch('https://fakestoreapi.com/products/categories')
+        .then((res) => res.json())
+        .then((json) => setCategories(json))
+        .catch((e) => console.warn('e', e));
+    } catch (error) {
+      console.warn('error', error);
+    }
+  };
+  if (loading)
+    return (
+      <ActivityIndicator
+        style={{
+          marginTop: 100,
+        }}
+        size="large"
+        color="red"
+      />
+    );
   return (
     <View style={styles.firstLevelContainer}>
       <Header
@@ -40,19 +96,24 @@ export const Home = () => {
           </View>
           <FlatList
             style={styles.listSpacing}
-            data={DATA}
+            data={categories}
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => (
               <TouchableOpacity
                 onPress={() => {
                   alert('Category!');
                 }}
-                style={styles.listItemContainer}
+                style={[
+                  styles.listItemContainer,
+                  {backgroundColor: colors.main, padding: 20, borderRadius: 20},
+                ]}
                 activeOpacity={0.8}>
-                <Image style={styles.catListItemImage} source={item.url} />
+                <Text style={{fontSize: 16, color: colors.white}}>
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </Text>
               </TouchableOpacity>
             )}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item}
             horizontal
           />
         </View>
@@ -72,22 +133,29 @@ export const Home = () => {
             style={styles.listSpacing}
             data={featureData}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
-              <TouchableOpacity
-                onPress={() => {
-                  alert('Product details: ' + item.title);
-                }}
-                style={styles.listItemContainer}
-                activeOpacity={0.8}>
-                <Image style={styles.itemComponentImage} source={item.url} />
-                <Text numberOfLines={1} style={styles.itemPrice}>
-                  {item.price}
-                </Text>
-                <Text numberOfLines={1} style={styles.itemTitle}>
-                  {item.title}
-                </Text>
-              </TouchableOpacity>
-            )}
+            renderItem={({item}) => {
+              console.log('item', item);
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    alert('Product details: ' + item.title);
+                  }}
+                  style={styles.listItemContainer}
+                  activeOpacity={0.8}>
+                  <Image
+                    style={styles.itemComponentImage}
+                    source={{uri: item.image}}
+                    resizeMode="contain"
+                  />
+                  <Text numberOfLines={1} style={styles.itemPrice}>
+                    ${item.price}
+                  </Text>
+                  <Text numberOfLines={1} style={styles.itemTitle}>
+                    {item.title}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }}
             keyExtractor={(item) => item.id}
             horizontal
           />
@@ -115,9 +183,13 @@ export const Home = () => {
                 }}
                 style={styles.listItemContainer}
                 activeOpacity={0.8}>
-                <Image style={styles.itemComponentImage} source={item.url} />
+                <Image
+                  style={styles.itemComponentImage}
+                  source={{uri: item.image}}
+                  resizeMode="contain"
+                />
                 <Text numberOfLines={1} style={styles.itemPrice}>
-                  {item.price}
+                  ${item.price}
                 </Text>
                 <Text numberOfLines={1} style={styles.itemTitle}>
                   {item.title}
@@ -132,108 +204,3 @@ export const Home = () => {
     </View>
   );
 };
-
-const DATA = [
-  {
-    id: 11651,
-    url: images.manCat,
-  },
-  {
-    id: 21656,
-    url: images.womanCat,
-  },
-  {
-    id: 31651,
-    url: images.kidsCat,
-  },
-  {
-    id: 651,
-    url: images.manCat,
-  },
-  {
-    id: 4205,
-    url: images.womanCat,
-  },
-  {
-    id: 7524,
-    url: images.kidsCat,
-  },
-];
-
-const featureData = [
-  {
-    id: 14984,
-    title: 'Woman T-Shirt',
-    price: '$55.00',
-    url: images.feature1,
-  },
-  {
-    id: 26511,
-    title: 'Man T-Shirt',
-    price: '$34.00',
-    url: images.feature2,
-  },
-  {
-    id: 39849,
-    title: 'Woman T-Shirt',
-    price: '$34.00',
-    url: images.feature3,
-  },
-  {
-    id: 8946513,
-    title: 'Woman T-Shirt',
-    price: '$55.00',
-    url: images.feature1,
-  },
-  {
-    id: 1214,
-    title: 'Man T-Shirt',
-    price: '$34.00',
-    url: images.feature2,
-  },
-  {
-    id: 61512365,
-    title: 'Woman T-Shirt',
-    price: '$34.00',
-    url: images.feature3,
-  },
-];
-
-const bestSellData = [
-  {
-    id: 6511235,
-    title: 'Woman T-Shirt',
-    price: '$24.00',
-    url: images.feature4,
-  },
-  {
-    id: 3516216,
-    title: 'Man T-Shirt',
-    price: '$44.00',
-    url: images.feature5,
-  },
-  {
-    id: 658941,
-    title: 'Woman T-Shirt',
-    price: '$34.00',
-    url: images.feature3,
-  },
-  {
-    id: 984123,
-    title: 'Woman T-Shirt',
-    price: '$24.00',
-    url: images.feature4,
-  },
-  {
-    id: 6513,
-    title: 'Man T-Shirt',
-    price: '$44.00',
-    url: images.feature5,
-  },
-  {
-    id: 4113,
-    title: 'Woman T-Shirt',
-    price: '$34.00',
-    url: images.feature3,
-  },
-];
