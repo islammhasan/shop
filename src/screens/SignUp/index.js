@@ -30,7 +30,7 @@ export const SignUp = () => {
         onPress={() => setShowPassword(!showPassword)}
       />
       <Button
-        customStyle={{marginTop: 30}}
+        customStyle={{marginTop: 30,alignSelf:'center'}}
         title="Sign up"
         onPress={() => alert('Signed up!')}
         isLoading={showIndicator}
