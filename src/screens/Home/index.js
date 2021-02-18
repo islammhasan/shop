@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {useState} from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import {
   View,
   Text,
@@ -9,26 +9,43 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import {colors, images} from '../../assets';
-import {Header} from '../../components/Header';
-import {SearchBar} from '../../components/SearchBar';
+import { colors, images } from '../../assets';
+import { Header } from '../../components/Header';
+import { SearchBar } from '../../components/SearchBar';
 import styles from './styles';
+import axios from 'axios';
 
 export const Home = () => {
   const [categories, setCategories] = useState([]);
   const [featureData, setFeatureData] = useState([]);
   const [bestSellData, setBestSellData] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     initialFetch();
   }, []);
 
   const initialFetch = async () => {
     await getCategories();
-    await getFeatureProducts();
+    // await getFeatureProducts();
     await getBestSellProducts();
+    await getFeatureProductsAxios();
     setLoading(false);
   };
+
+  const getFeatureProductsAxios = async () => {
+    try {
+      const response = await axios.get('https://fakestoreapi.com/products', {
+        params: {
+          limit: 5
+        }
+      })
+      setFeatureData(response.data)
+    } catch (error) {
+      console.warn(error)
+    }
+  }
+
   const getFeatureProducts = async () => {
     try {
       await fetch('https://fakestoreapi.com/products?limit=5')
@@ -98,17 +115,17 @@ export const Home = () => {
             style={styles.listSpacing}
             data={categories}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() => {
                   alert('Category!');
                 }}
                 style={[
                   styles.listItemContainer,
-                  {backgroundColor: colors.main, padding: 20, borderRadius: 20},
+                  { backgroundColor: colors.main, padding: 15, borderRadius: 20 },
                 ]}
                 activeOpacity={0.8}>
-                <Text style={{fontSize: 16, color: colors.white}}>
+                <Text style={{ fontSize: 16, color: colors.white }}>
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </Text>
               </TouchableOpacity>
@@ -133,7 +150,7 @@ export const Home = () => {
             style={styles.listSpacing}
             data={featureData}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => {
+            renderItem={({ item }) => {
               console.log('item', item);
               return (
                 <TouchableOpacity
@@ -144,7 +161,7 @@ export const Home = () => {
                   activeOpacity={0.8}>
                   <Image
                     style={styles.itemComponentImage}
-                    source={{uri: item.image}}
+                    source={{ uri: item.image }}
                     resizeMode="contain"
                   />
                   <Text numberOfLines={1} style={styles.itemPrice}>
@@ -176,7 +193,7 @@ export const Home = () => {
             style={styles.listSpacing}
             data={bestSellData}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <TouchableOpacity
                 onPress={() => {
                   alert('Product details: ' + item.title);
@@ -185,7 +202,7 @@ export const Home = () => {
                 activeOpacity={0.8}>
                 <Image
                   style={styles.itemComponentImage}
-                  source={{uri: item.image}}
+                  source={{ uri: item.image }}
                   resizeMode="contain"
                 />
                 <Text numberOfLines={1} style={styles.itemPrice}>
