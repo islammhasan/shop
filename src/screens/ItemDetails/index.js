@@ -12,7 +12,8 @@ import styles from './styles';
 import Swiper from 'react-native-swiper';
 import {colors, images} from '../../assets';
 
-export const ItemDetails = () => {
+export const ItemDetails = ({route}) => {
+  const {id} = route.params;
   const price = 50;
   const special_price = 20;
   const descriptionData =
@@ -24,14 +25,14 @@ export const ItemDetails = () => {
 
   return (
     <View style={styles.container}>
-      <Header
+      {/* <Header
         hasBack
         hasSearch
         hasCart
         onBackPress={() => alert('onBackPress')}
         onCartPress={() => alert('onCartPress')}
         onSearchPress={() => alert('onSearchPress')}
-      />
+      /> */}
       <ScrollView contentContainerStyle={styles.sView}>
         <Swiper
           height={175}

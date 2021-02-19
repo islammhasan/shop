@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, {useEffect} from 'react';
+import {useState} from 'react';
 import {
   View,
   Text,
@@ -9,13 +9,13 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import { colors, images } from '../../assets';
-import { Header } from '../../components/Header';
-import { SearchBar } from '../../components/SearchBar';
+import {colors, images} from '../../assets';
+import {Header} from '../../components/Header';
+import {SearchBar} from '../../components/SearchBar';
 import styles from './styles';
 import axios from 'axios';
 
-export const Home = () => {
+export const Home = ({navigation}) => {
   const [categories, setCategories] = useState([]);
   const [featureData, setFeatureData] = useState([]);
   const [bestSellData, setBestSellData] = useState([]);
@@ -37,14 +37,14 @@ export const Home = () => {
     try {
       const response = await axios.get('https://fakestoreapi.com/products', {
         params: {
-          limit: 5
-        }
-      })
-      setFeatureData(response.data)
+          limit: 5,
+        },
+      });
+      setFeatureData(response.data);
     } catch (error) {
-      console.warn(error)
+      console.warn(error);
     }
-  }
+  };
 
   const getFeatureProducts = async () => {
     try {
@@ -88,14 +88,14 @@ export const Home = () => {
     );
   return (
     <View style={styles.firstLevelContainer}>
-      <Header
+      {/* <Header
         hasMenu
         hasCart
         hasFilter
         onMenuPress={() => alert('onMenuPress')}
         onCartPress={() => alert('onCartPress')}
         onFilterPress={() => alert('onFilterPress')}
-      />
+      /> */}
       <SearchBar />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -115,17 +115,17 @@ export const Home = () => {
             style={styles.listSpacing}
             data={categories}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <TouchableOpacity
                 onPress={() => {
-                  alert('Category!');
+                  alert(`Category : ${item}`);
                 }}
                 style={[
                   styles.listItemContainer,
-                  { backgroundColor: colors.main, padding: 15, borderRadius: 20 },
+                  {backgroundColor: colors.main, padding: 15, borderRadius: 20},
                 ]}
                 activeOpacity={0.8}>
-                <Text style={{ fontSize: 16, color: colors.white }}>
+                <Text style={{fontSize: 16, color: colors.white}}>
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </Text>
               </TouchableOpacity>
@@ -150,18 +150,18 @@ export const Home = () => {
             style={styles.listSpacing}
             data={featureData}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => {
+            renderItem={({item}) => {
               console.log('item', item);
               return (
                 <TouchableOpacity
-                  onPress={() => {
-                    alert('Product details: ' + item.title);
-                  }}
+                  onPress={() =>
+                    navigation.navigate('ItemDetails', {id: item.id})
+                  }
                   style={styles.listItemContainer}
                   activeOpacity={0.8}>
                   <Image
                     style={styles.itemComponentImage}
-                    source={{ uri: item.image }}
+                    source={{uri: item.image}}
                     resizeMode="contain"
                   />
                   <Text numberOfLines={1} style={styles.itemPrice}>
@@ -193,7 +193,7 @@ export const Home = () => {
             style={styles.listSpacing}
             data={bestSellData}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <TouchableOpacity
                 onPress={() => {
                   alert('Product details: ' + item.title);
@@ -202,7 +202,7 @@ export const Home = () => {
                 activeOpacity={0.8}>
                 <Image
                   style={styles.itemComponentImage}
-                  source={{ uri: item.image }}
+                  source={{uri: item.image}}
                   resizeMode="contain"
                 />
                 <Text numberOfLines={1} style={styles.itemPrice}>

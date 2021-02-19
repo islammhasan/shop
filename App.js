@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {AppContainer} from './src/navigation';
 
 const App = () => {
-  return <SafeAreaView style={styles.container}></SafeAreaView>;
+  return <AppContainer />;
 };
 
 const styles = StyleSheet.create({
