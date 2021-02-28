@@ -6,11 +6,16 @@ export default styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Platform.OS == 'ios' ? 20 : 0,
+    backgroundColor: '#ffffff'
   },
   wrapper: {},
   slideImage: {
     width: '100%',
     height: 175,
+  },
+  singleImage: {
+    width: '100%',
+    height: 275,
   },
   sView: {
     paddingHorizontal: 24,

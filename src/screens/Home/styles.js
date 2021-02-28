@@ -1,8 +1,9 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default styles = StyleSheet.create({
   firstLevelContainer: {
     flex: 1,
+    backgroundColor: "#ffffff"
   },
   container: {
     paddingBottom: 30,
@@ -45,6 +46,6 @@ export default styles = StyleSheet.create({
   itemTitle: {
     fontSize: 16,
     marginTop: 7,
-    maxWidth:114
+    maxWidth: 114
   },
 });
