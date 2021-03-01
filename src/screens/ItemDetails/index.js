@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import {
   View,
   Text,
@@ -7,23 +7,26 @@ import {
   Image,
   FlatList,
 } from 'react-native';
-import { Header } from '../../components/Header';
+import {Header} from '../../components/Header';
 import styles from './styles';
 import Swiper from 'react-native-swiper';
-import { colors, images } from '../../assets';
+import {colors, images} from '../../assets';
 
-export const ItemDetails = ({ route }) => {
-  const { id, title, description, price, image } = route.params;
-  const itemTitle = title;
-  const itemPrice = price;
+export const ItemDetails = ({navigation, route}) => {
+  const {id, title, description, price, image} = route.params;
   const special_price = null;
-  const descriptionData = description;
-  const itemImage = image;
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [switchTabs, setSwitchTabs] = useState(true);
   const [numOfLines, setNumOfLines] = useState(3);
-
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: title,
+      headerRight: () => (
+        <Text>Islam</Text>
+      ),
+    });
+  }, [navigation]);
   return (
     <View style={styles.container}>
       {/* <Header
@@ -55,18 +58,18 @@ export const ItemDetails = ({ route }) => {
         </Swiper> */}
         <View style={styles.slide1}>
           <Image
-            source={{ uri: itemImage }}
+            source={{uri: image}}
             resizeMode={'contain'}
             style={styles.singleImage}
           />
         </View>
         <Text numberOfLines={3} style={styles.productTitle}>
-          {itemTitle}
+          {title}
         </Text>
-        {(itemPrice || special_price) && (
+        {(price || special_price) && (
           <View style={styles.priceContainer}>
-            <Text style={styles.price}>${special_price || itemPrice}</Text>
-            {special_price && <Text style={styles.discount}>${itemPrice}</Text>}
+            <Text style={styles.price}>${special_price || price}</Text>
+            {special_price && <Text style={styles.discount}>${price}</Text>}
           </View>
         )}
         <View style={styles.ratingContainer}>
@@ -82,7 +85,7 @@ export const ItemDetails = ({ route }) => {
         </View>
         <Text style={styles.descriptionTitle}>Description</Text>
         <Text numberOfLines={numOfLines} style={styles.description}>
-          {descriptionData}
+          {description}
         </Text>
         <TouchableOpacity
           onPress={() =>
@@ -112,8 +115,8 @@ export const ItemDetails = ({ route }) => {
             data={sizes}
             contentContainerStyle={styles.tabsContent}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => {
-              const { size, id } = item;
+            renderItem={({item}) => {
+              const {size, id} = item;
               const isSelected = selectedSize == id;
               return (
                 <TouchableOpacity
@@ -121,7 +124,7 @@ export const ItemDetails = ({ route }) => {
                   activeOpacity={0.8}
                   style={[
                     styles.list,
-                    isSelected && { backgroundColor: colors.main },
+                    isSelected && {backgroundColor: colors.main},
                   ]}>
                   <Text
                     style={{
@@ -137,35 +140,35 @@ export const ItemDetails = ({ route }) => {
             horizontal
           />
         ) : (
-            <FlatList
-              data={_colors}
-              contentContainerStyle={styles.tabsContent}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => {
-                const { color, id } = item;
-                const isSelected = selectedColor == id;
-                return (
-                  <TouchableOpacity
-                    onPress={() => setSelectedColor(id)}
-                    activeOpacity={0.8}
-                    style={[
-                      styles.list,
-                      isSelected && { backgroundColor: colors.main },
-                    ]}>
-                    <Text
-                      style={{
-                        color: isSelected ? colors.white : colors.black,
-                        fontSize: 16,
-                      }}>
-                      {color}
-                    </Text>
-                  </TouchableOpacity>
-                );
-              }}
-              keyExtractor={(item) => item.id.toString()}
-              horizontal
-            />
-          )}
+          <FlatList
+            data={_colors}
+            contentContainerStyle={styles.tabsContent}
+            showsHorizontalScrollIndicator={false}
+            renderItem={({item}) => {
+              const {color, id} = item;
+              const isSelected = selectedColor == id;
+              return (
+                <TouchableOpacity
+                  onPress={() => setSelectedColor(id)}
+                  activeOpacity={0.8}
+                  style={[
+                    styles.list,
+                    isSelected && {backgroundColor: colors.main},
+                  ]}>
+                  <Text
+                    style={{
+                      color: isSelected ? colors.white : colors.black,
+                      fontSize: 16,
+                    }}>
+                    {color}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }}
+            keyExtractor={(item) => item.id.toString()}
+            horizontal
+          />
+        )}
       </ScrollView>
       <View style={styles.bottomBtns}>
         <TouchableOpacity
@@ -186,21 +189,21 @@ export const ItemDetails = ({ route }) => {
 };
 
 const sizes = [
-  { id: 1, size: 's' },
-  { id: 2, size: 'm' },
-  { id: 3, size: 'l' },
-  { id: 4, size: 'xl' },
-  { id: 5, size: 'xxl' },
-  { id: 6, size: 'xxxl' },
+  {id: 1, size: 's'},
+  {id: 2, size: 'm'},
+  {id: 3, size: 'l'},
+  {id: 4, size: 'xl'},
+  {id: 5, size: 'xxl'},
+  {id: 6, size: 'xxxl'},
 ];
 
 const _colors = [
-  { id: 1, color: 'red' },
-  { id: 2, color: 'green' },
-  { id: 3, color: 'blue' },
-  { id: 4, color: 'yellow' },
-  { id: 5, color: 'black' },
-  { id: 6, color: 'white' },
+  {id: 1, color: 'red'},
+  {id: 2, color: 'green'},
+  {id: 3, color: 'blue'},
+  {id: 4, color: 'yellow'},
+  {id: 5, color: 'black'},
+  {id: 6, color: 'white'},
 ];
 
 const _Images = [

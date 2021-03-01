@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
+import {useState} from 'react';
 import {
   View,
   Text,
@@ -9,13 +9,12 @@ import {
   FlatList,
   ActivityIndicator,
 } from 'react-native';
-import { colors, images } from '../../assets';
-import { Header } from '../../components/Header';
-import { SearchBar } from '../../components/SearchBar';
+import {colors, images} from '../../assets';
+import {SearchBar} from '../../components/SearchBar';
 import styles from './styles';
 import axios from 'axios';
-
-export const Home = ({ navigation }) => {
+import {Cart, FilterComponent, MenuComponent} from '../../components';
+export const Home = ({navigation}) => {
   const [categories, setCategories] = useState([]);
   const [featureData, setFeatureData] = useState([]);
   const [bestSellData, setBestSellData] = useState([]);
@@ -24,6 +23,23 @@ export const Home = ({ navigation }) => {
   useEffect(() => {
     initialFetch();
   }, []);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: null,
+      headerLeft: () => {
+        return <MenuComponent />;
+      },
+      headerRight: () => {
+        return (
+          <View style={{flexDirection: 'row'}}>
+            <Cart />
+            <FilterComponent />
+          </View>
+        );
+      },
+    });
+  }, [navigation]);
 
   const initialFetch = async () => {
     await getCategories();
@@ -115,17 +131,17 @@ export const Home = ({ navigation }) => {
             style={styles.listSpacing}
             data={categories}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <TouchableOpacity
                 onPress={() => {
                   alert(`Category : ${item}`);
                 }}
                 style={[
                   styles.listItemContainer,
-                  { backgroundColor: colors.main, padding: 15, borderRadius: 20 },
+                  {backgroundColor: colors.main, padding: 15, borderRadius: 20},
                 ]}
                 activeOpacity={0.8}>
-                <Text style={{ fontSize: 16, color: colors.white }}>
+                <Text style={{fontSize: 16, color: colors.white}}>
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </Text>
               </TouchableOpacity>
@@ -150,19 +166,25 @@ export const Home = ({ navigation }) => {
             style={styles.listSpacing}
             data={featureData}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => {
-              const { id, image, price, title, description } = item;
+            renderItem={({item}) => {
+              const {id, image, price, title, description} = item;
               console.log('item', item);
               return (
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('ItemDetails', { id, image, price, title, description })
+                    navigation.navigate('ItemDetails', {
+                      id,
+                      image,
+                      price,
+                      title,
+                      description,
+                    })
                   }
                   style={styles.listItemContainer}
                   activeOpacity={0.8}>
                   <Image
                     style={styles.itemComponentImage}
-                    source={{ uri: image }}
+                    source={{uri: image}}
                     resizeMode="contain"
                   />
                   <Text numberOfLines={1} style={styles.itemPrice}>
@@ -194,18 +216,24 @@ export const Home = ({ navigation }) => {
             style={styles.listSpacing}
             data={bestSellData}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => {
-              const { id, image, price, title, description } = item;
+            renderItem={({item}) => {
+              const {id, image, price, title, description} = item;
               return (
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate('ItemDetails', { id, image, price, title, description })
+                    navigation.navigate('ItemDetails', {
+                      id,
+                      image,
+                      price,
+                      title,
+                      description,
+                    })
                   }
                   style={styles.listItemContainer}
                   activeOpacity={0.8}>
                   <Image
                     style={styles.itemComponentImage}
-                    source={{ uri: image }}
+                    source={{uri: image}}
                     resizeMode="contain"
                   />
                   <Text numberOfLines={1} style={styles.itemPrice}>

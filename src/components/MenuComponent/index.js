@@ -1,11 +1,14 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {images} from '../../assets';
 
-export const MenuComponent = (props) => {
-  const {onMenuPress} = props;
+export const MenuComponent = () => {
+  const navigation = useNavigation();
   return (
-    <TouchableOpacity onPress={onMenuPress} style={styles.iconContainer}>
+    <TouchableOpacity
+      onPress={() => navigation.toggleDrawer()}
+      style={styles.iconContainer}>
       <Image
         source={images.menu}
         resizeMode="contain"

@@ -10,12 +10,12 @@ export const Cart = () => {
   const [counter, setCounter] = useState(1);
   return (
     <View style={styles.container}>
-      <Header
+      {/* <Header
         hasBack
         hasSearch
         onBackPress={() => alert('onBackPress')}
         onSearchPress={() => alert('onSearchPress')}
-      />
+      /> */}
       <Text style={styles.screenTitle}>Cart</Text>
       <FlatList
         showsVerticalScrollIndicator={false}

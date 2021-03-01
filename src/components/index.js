@@ -1,2 +1,5 @@
 export * from './Button'
 export * from './PrimaryInput'
+export * from './Cart'
+export * from './FilterComponent'
+export * from './MenuComponent'
