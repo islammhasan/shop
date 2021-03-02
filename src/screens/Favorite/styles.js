@@ -1,16 +1,18 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../assets';
+import { StyleSheet } from 'react-native';
+import { colors } from '../../assets';
 
 export default styles = StyleSheet.create({
   screenTitle: {
     color: colors.black,
     fontSize: 30,
-    marginStart: 24,
+    paddingStart: 24,
+    backgroundColor: '#ffffff'
   },
   listContainerStyle: {
     alignItems: 'center',
     paddingBottom: 20,
-    marginTop: 20,
+    paddingTop: 20,
+    backgroundColor: '#ffffff'
   },
   itemContainerStyle: {
     marginHorizontal: 13,
@@ -28,5 +30,6 @@ export default styles = StyleSheet.create({
   itemTitleStyle: {
     fontSize: 16,
     marginTop: 7,
+    maxWidth: 114
   },
 });

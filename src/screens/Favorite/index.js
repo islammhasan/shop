@@ -1,39 +1,91 @@
-import React from 'react';
-import {Text, TouchableOpacity, Image, FlatList} from 'react-native';
-import {images} from '../../assets';
-import {Header} from '../../components/Header';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
+import { Text, TouchableOpacity, Image, FlatList, ActivityIndicator } from 'react-native';
+import { colors, images } from '../../assets';
+import { MenuComponent } from '../../components';
+import { Header } from '../../components/Header';
 import styles from './styles';
+import axios from 'axios';
 
-export const Favorite = () => {
+export const Favorite = ({ navigation }) => {
+  const [favoriteData, setFavoriteData] = useState([])
+  const [loading, setLoading] = useState(true);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => {
+        return <MenuComponent />
+      },
+      headerTitle: null,
+    })
+  }, [navigation])
+
+  useEffect(() => {
+    getFavoriteProducts();
+  }, [])
+
+  const getFavoriteProducts = async () => {
+    try {
+      const response = await axios.get('https://fakestoreapi.com/products', {
+        params: {
+          limit: 10
+        }
+      })
+      setFavoriteData(response.data)
+      setLoading(false)
+    } catch (err) {
+      console.warn(err)
+    }
+  }
+
   return (
     <>
-      <Header
+      {/* <Header
         hasBack
         hasSearch
         onBackPress={() => alert('onBackPress')}
         onSearchPress={() => alert('onSearchPress')}
-      />
+      /> */}
       <Text style={styles.screenTitle}>Favorite</Text>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={FavoriteData}
-        contentContainerStyle={styles.listContainerStyle}
-        numColumns={2}
-        renderItem={({item}) => (
-          <TouchableOpacity
-            onPress={() => {
-              alert('Product details: ' + item.title);
+      {
+        loading ?
+          <ActivityIndicator
+            style={{
+              marginTop: 100,
             }}
-            activeOpacity={0.8}
-            horizontal={false}
-            style={styles.itemContainerStyle}>
-            <Image style={styles.itemImageStyle} source={item.url} />
-            <Text style={styles.itemPriceStyle}>{item.price}</Text>
-            <Text style={styles.itemTitleStyle}>{item.title}</Text>
-          </TouchableOpacity>
-        )}
-        keyExtractor={(item) => item.id}
-      />
+            size="large"
+            color={colors.main}
+          />
+          :
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            data={favoriteData}
+            contentContainerStyle={styles.listContainerStyle}
+            numColumns={2}
+            renderItem={({ item }) => {
+              const { id, image, price, title, description } = item;
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('ItemDetails', {
+                      id,
+                      image,
+                      price,
+                      title,
+                      description,
+                    })
+                  }}
+                  activeOpacity={0.8}
+                  horizontal={false}
+                  style={styles.itemContainerStyle}>
+                  <Image resizeMode="contain" style={styles.itemImageStyle} source={{ uri: image }} />
+                  <Text style={styles.itemPriceStyle}>{price}</Text>
+                  <Text numberOfLines={1} style={styles.itemTitleStyle}>{title}</Text>
+                </TouchableOpacity>
+              );
+            }}
+            keyExtractor={(item) => item.id}
+          />
+      }
     </>
   );
 };

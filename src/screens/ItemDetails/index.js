@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import {
   View,
   Text,
@@ -7,13 +7,14 @@ import {
   Image,
   FlatList,
 } from 'react-native';
-import {Header} from '../../components/Header';
+import { Header } from '../../components/Header';
 import styles from './styles';
 import Swiper from 'react-native-swiper';
-import {colors, images} from '../../assets';
+import { colors, images } from '../../assets';
+import { Cart, Search } from '../../components';
 
-export const ItemDetails = ({navigation, route}) => {
-  const {id, title, description, price, image} = route.params;
+export const ItemDetails = ({ navigation, route }) => {
+  const { id, title, description, price, image } = route.params;
   const special_price = null;
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
@@ -21,10 +22,15 @@ export const ItemDetails = ({navigation, route}) => {
   const [numOfLines, setNumOfLines] = useState(3);
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerTitle: title,
-      headerRight: () => (
-        <Text>Islam</Text>
-      ),
+      headerTitle: null,
+      headerRight: () => {
+        return (
+          <View style={styles.headerIconsRight}>
+            <Cart />
+            <Search />
+          </View>
+        )
+      },
     });
   }, [navigation]);
   return (
@@ -58,7 +64,7 @@ export const ItemDetails = ({navigation, route}) => {
         </Swiper> */}
         <View style={styles.slide1}>
           <Image
-            source={{uri: image}}
+            source={{ uri: image }}
             resizeMode={'contain'}
             style={styles.singleImage}
           />
@@ -115,8 +121,8 @@ export const ItemDetails = ({navigation, route}) => {
             data={sizes}
             contentContainerStyle={styles.tabsContent}
             showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => {
-              const {size, id} = item;
+            renderItem={({ item }) => {
+              const { size, id } = item;
               const isSelected = selectedSize == id;
               return (
                 <TouchableOpacity
@@ -124,7 +130,7 @@ export const ItemDetails = ({navigation, route}) => {
                   activeOpacity={0.8}
                   style={[
                     styles.list,
-                    isSelected && {backgroundColor: colors.main},
+                    isSelected && { backgroundColor: colors.main },
                   ]}>
                   <Text
                     style={{
@@ -140,35 +146,35 @@ export const ItemDetails = ({navigation, route}) => {
             horizontal
           />
         ) : (
-          <FlatList
-            data={_colors}
-            contentContainerStyle={styles.tabsContent}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({item}) => {
-              const {color, id} = item;
-              const isSelected = selectedColor == id;
-              return (
-                <TouchableOpacity
-                  onPress={() => setSelectedColor(id)}
-                  activeOpacity={0.8}
-                  style={[
-                    styles.list,
-                    isSelected && {backgroundColor: colors.main},
-                  ]}>
-                  <Text
-                    style={{
-                      color: isSelected ? colors.white : colors.black,
-                      fontSize: 16,
-                    }}>
-                    {color}
-                  </Text>
-                </TouchableOpacity>
-              );
-            }}
-            keyExtractor={(item) => item.id.toString()}
-            horizontal
-          />
-        )}
+            <FlatList
+              data={_colors}
+              contentContainerStyle={styles.tabsContent}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({ item }) => {
+                const { color, id } = item;
+                const isSelected = selectedColor == id;
+                return (
+                  <TouchableOpacity
+                    onPress={() => setSelectedColor(id)}
+                    activeOpacity={0.8}
+                    style={[
+                      styles.list,
+                      isSelected && { backgroundColor: colors.main },
+                    ]}>
+                    <Text
+                      style={{
+                        color: isSelected ? colors.white : colors.black,
+                        fontSize: 16,
+                      }}>
+                      {color}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              }}
+              keyExtractor={(item) => item.id.toString()}
+              horizontal
+            />
+          )}
       </ScrollView>
       <View style={styles.bottomBtns}>
         <TouchableOpacity
@@ -189,21 +195,21 @@ export const ItemDetails = ({navigation, route}) => {
 };
 
 const sizes = [
-  {id: 1, size: 's'},
-  {id: 2, size: 'm'},
-  {id: 3, size: 'l'},
-  {id: 4, size: 'xl'},
-  {id: 5, size: 'xxl'},
-  {id: 6, size: 'xxxl'},
+  { id: 1, size: 's' },
+  { id: 2, size: 'm' },
+  { id: 3, size: 'l' },
+  { id: 4, size: 'xl' },
+  { id: 5, size: 'xxl' },
+  { id: 6, size: 'xxxl' },
 ];
 
 const _colors = [
-  {id: 1, color: 'red'},
-  {id: 2, color: 'green'},
-  {id: 3, color: 'blue'},
-  {id: 4, color: 'yellow'},
-  {id: 5, color: 'black'},
-  {id: 6, color: 'white'},
+  { id: 1, color: 'red' },
+  { id: 2, color: 'green' },
+  { id: 3, color: 'blue' },
+  { id: 4, color: 'yellow' },
+  { id: 5, color: 'black' },
+  { id: 6, color: 'white' },
 ];
 
 const _Images = [

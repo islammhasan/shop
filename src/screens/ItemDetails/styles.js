@@ -1,11 +1,10 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../assets';
-import {Platform} from 'react-native';
+import { StyleSheet } from 'react-native';
+import { colors } from '../../assets';
+import { Platform } from 'react-native';
 
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Platform.OS == 'ios' ? 20 : 0,
     backgroundColor: '#ffffff'
   },
   wrapper: {},
@@ -18,6 +17,7 @@ export default styles = StyleSheet.create({
     height: 275,
   },
   sView: {
+    marginTop: 10,
     paddingHorizontal: 24,
   },
   slide1: {},
@@ -178,4 +178,7 @@ export default styles = StyleSheet.create({
     shadowRadius: 1,
     elevation: 3,
   },
+  headerIconsRight: {
+    flexDirection: 'row'
+  }
 });

@@ -1,11 +1,12 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../assets';
+import { StyleSheet } from 'react-native';
+import { colors } from '../../assets';
 
 export default styles = StyleSheet.create({
   screenTitle: {
     color: colors.black,
     fontSize: 30,
-    marginStart: 24,
+    paddingStart: 24,
+    backgroundColor: "#ffffff"
   },
   itemContainer: {
     flexDirection: 'row',
@@ -36,8 +37,9 @@ export default styles = StyleSheet.create({
     elevation: 1,
   },
   listStyle: {
-    marginTop: 34,
+    paddingTop: 34,
     paddingBottom: 50,
+    backgroundColor: "#ffffff"
   },
   itemDetails: {
     flex: 1,

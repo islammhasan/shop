@@ -1,25 +1,36 @@
-import React from 'react';
-import {View, Text, Image, FlatList} from 'react-native';
-import {Header} from '../../components/Header';
-import {Button} from '../../components/Button';
+import React, { useLayoutEffect } from 'react';
+import { View, Text, Image, FlatList } from 'react-native';
+import { Header } from '../../components/Header';
+import { Button } from '../../components/Button';
 import styles from './styles';
-import {images} from '../../assets';
+import { images } from '../../assets';
+import { MenuComponent } from '../../components';
 
-export const MyOrders = () => {
+export const MyOrders = ({ navigation }) => {
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => {
+        return <MenuComponent />
+      },
+      headerTitle: null,
+    })
+  }, [navigation])
+
   return (
     <>
-      <Header
+      {/* <Header
         hasBack
         hasSearch
         onBackPress={() => alert('onBackPress')}
         onSearchPress={() => alert('onSearchPress')}
-      />
+      /> */}
       <Text style={styles.screenTitle}>My Orders</Text>
       <FlatList
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listStyle}
         data={DATA}
-        renderItem={({item}) => {
+        renderItem={({ item }) => {
           return (
             <View key={item.id} style={styles.itemContainer}>
               <View style={styles.imageContainer}>

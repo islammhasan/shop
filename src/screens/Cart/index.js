@@ -1,13 +1,23 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, Image, FlatList} from 'react-native';
-import {Header} from '../../components/Header';
-import {Button} from '../../components/Button';
+import React, { useState, useLayoutEffect } from 'react';
+import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
+import { Header } from '../../components/Header';
+import { Button } from '../../components/Button';
 import styles from './styles';
-import {images} from '../../assets';
+import { images } from '../../assets';
+import { MenuComponent } from '../../components';
 
-export const Cart = () => {
+export const Cart = ({ navigation }) => {
   const [showIndicator, setShowIndicator] = useState(false);
   const [counter, setCounter] = useState(1);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => {
+        return <MenuComponent />
+      },
+      headerTitle: null,
+    })
+  }, [navigation])
   return (
     <View style={styles.container}>
       {/* <Header
@@ -21,7 +31,7 @@ export const Cart = () => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listStyle}
         data={DATA}
-        renderItem={({item}) => {
+        renderItem={({ item }) => {
           return (
             <View key={item.id} style={styles.itemContainer}>
               <View style={styles.imageContainer}>

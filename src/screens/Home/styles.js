@@ -4,7 +4,7 @@ export default styles = StyleSheet.create({
   firstLevelContainer: {
     flex: 1,
     backgroundColor: "#ffffff",
-    paddingTop:20
+    paddingTop: 6
   },
   container: {
     paddingBottom: 30,

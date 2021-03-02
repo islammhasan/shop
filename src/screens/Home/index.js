@@ -99,7 +99,7 @@ export const Home = ({navigation}) => {
           marginTop: 100,
         }}
         size="large"
-        color="red"
+        color={colors.main}
       />
     );
   return (
