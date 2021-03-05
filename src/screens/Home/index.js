@@ -14,7 +14,10 @@ import {SearchBar} from '../../components/SearchBar';
 import styles from './styles';
 import axios from 'axios';
 import {Cart, FilterComponent, MenuComponent} from '../../components';
+import {useDispatch, useSelector} from 'react-redux';
+import {actions, getProducts} from '../../redux/products/actions';
 export const Home = ({navigation}) => {
+  const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   const [featureData, setFeatureData] = useState([]);
   const [bestSellData, setBestSellData] = useState([]);
@@ -44,8 +47,10 @@ export const Home = ({navigation}) => {
   const initialFetch = async () => {
     await getCategories();
     // await getFeatureProducts();
+    // dispatch(actions.getProducts())
+    await getFeatureProductsRedux();
     await getBestSellProducts();
-    await getFeatureProductsAxios();
+    // await getFeatureProductsAxios();
     setLoading(false);
   };
 
@@ -57,6 +62,14 @@ export const Home = ({navigation}) => {
         },
       });
       setFeatureData(response.data);
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+  const getFeatureProductsRedux = async () => {
+    try {
+      const response = await dispatch(getProducts());
+      setFeatureData(response);
     } catch (error) {
       console.warn(error);
     }
