@@ -8,6 +8,7 @@ import {
   Image,
   FlatList,
   ActivityIndicator,
+  Button,
 } from 'react-native';
 import {colors, images} from '../../assets';
 import {SearchBar} from '../../components/SearchBar';
@@ -15,14 +16,16 @@ import styles from './styles';
 import axios from 'axios';
 import {Cart, FilterComponent, MenuComponent} from '../../components';
 import {useDispatch, useSelector} from 'react-redux';
-import {actions, getProducts} from '../../redux/products/actions';
+import {actions, getProducts} from '../../redux/products';
+import {confirmUser, userLogin} from '../../redux/user';
+import {store} from '../../redux/store';
 export const Home = ({navigation}) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
   const [categories, setCategories] = useState([]);
   const [featureData, setFeatureData] = useState([]);
   const [bestSellData, setBestSellData] = useState([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     initialFetch();
   }, []);
@@ -46,6 +49,7 @@ export const Home = ({navigation}) => {
 
   const initialFetch = async () => {
     await getCategories();
+    // dispatch(userLogin());
     // await getFeatureProducts();
     // dispatch(actions.getProducts())
     await getFeatureProductsRedux();
@@ -115,8 +119,16 @@ export const Home = ({navigation}) => {
         color={colors.main}
       />
     );
+  const data = {phone: '01117727651', code: user?.code};
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${user?.token}`,
+    },
+  };
+  
   return (
     <View style={styles.firstLevelContainer}>
+      <Button title="ss" onPress={() => dispatch(confirmUser(data))} />
       {/* <Header
         hasMenu
         hasCart
@@ -181,7 +193,6 @@ export const Home = ({navigation}) => {
             showsHorizontalScrollIndicator={false}
             renderItem={({item}) => {
               const {id, image, price, title, description} = item;
-              console.log('item', item);
               return (
                 <TouchableOpacity
                   onPress={() =>

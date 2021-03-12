@@ -1,6 +1,6 @@
 import {createStore, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import reducers from '..';
+import reducers from './index';
 import {persistStore, persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import Reactotron from '../config/ReactotronConfig';
@@ -18,7 +18,7 @@ const reactotrionEnhancer = Reactotron.createEnhancer();
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: [],
+  whitelist: ['user'],
 };
 const persistedReducer = persistReducer(persistConfig, reducers);
 export const store = createStore(
