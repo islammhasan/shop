@@ -9,7 +9,7 @@ if (__DEV__) {
 }
 
 const reactotron = Reactotron.configure({
-  // host: scriptHostname,
+  host: scriptHostname,
   name: 'Shop',
 })
   .useReactNative({

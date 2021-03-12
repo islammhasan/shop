@@ -17,7 +17,14 @@ import axios from 'axios';
 import {Cart, FilterComponent, MenuComponent} from '../../components';
 import {useDispatch, useSelector} from 'react-redux';
 import {actions, getProducts} from '../../redux/products';
-import {confirmUser, userLogin} from '../../redux/user';
+import {
+  addAddress,
+  confirmUser,
+  fetchUserDate,
+  getAddresses,
+  updateUsername,
+  userLogin,
+} from '../../redux/user';
 import {store} from '../../redux/store';
 export const Home = ({navigation}) => {
   const dispatch = useDispatch();
@@ -119,16 +126,43 @@ export const Home = ({navigation}) => {
         color={colors.main}
       />
     );
-  const data = {phone: '01117727651', code: user?.code};
+  const data = {phone: '0123456789', code: user?.code};
+  const addressData = {
+    name: 'iss',
+    phone: '0123456789',
+    city: 'cairo',
+    area: 'cairo',
+    street: 'street',
+    building: '3',
+  };
+  const newUsername = {
+    name: 'issagain',
+  };
   const headers = {
     headers: {
       Authorization: `Bearer ${user?.token}`,
     },
   };
-  
+
   return (
     <View style={styles.firstLevelContainer}>
       <Button title="ss" onPress={() => dispatch(confirmUser(data))} />
+      <Button
+        title="add address"
+        onPress={() => dispatch(addAddress(addressData, headers))}
+      />
+      <Button
+        title="get address"
+        onPress={() => dispatch(getAddresses(headers))}
+      />
+      <Button
+        title="update username"
+        onPress={() => dispatch(updateUsername(newUsername, headers))}
+      />
+      <Button
+        title="fetch user data"
+        onPress={() => dispatch(fetchUserDate(headers))}
+      />
       {/* <Header
         hasMenu
         hasCart
