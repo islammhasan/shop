@@ -25,7 +25,6 @@ import {
   updateUsername,
   userLogin,
 } from '../../redux/user';
-import {store} from '../../redux/store';
 export const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -138,30 +137,22 @@ export const Home = ({navigation}) => {
   const newUsername = {
     name: 'issagain',
   };
-  const headers = {
-    headers: {
-      Authorization: `Bearer ${user?.token}`,
-    },
-  };
 
   return (
     <View style={styles.firstLevelContainer}>
       <Button title="ss" onPress={() => dispatch(confirmUser(data))} />
       <Button
         title="add address"
-        onPress={() => dispatch(addAddress(addressData, headers))}
+        onPress={() => dispatch(addAddress(addressData))}
       />
-      <Button
-        title="get address"
-        onPress={() => dispatch(getAddresses(headers))}
-      />
+      <Button title="get address" onPress={() => dispatch(getAddresses())} />
       <Button
         title="update username"
-        onPress={() => dispatch(updateUsername(newUsername, headers))}
+        onPress={() => dispatch(updateUsername(newUsername))}
       />
       <Button
         title="fetch user data"
-        onPress={() => dispatch(fetchUserDate(headers))}
+        onPress={() => dispatch(fetchUserDate())}
       />
       {/* <Header
         hasMenu

@@ -42,7 +42,14 @@ export const confirmUser = (data) => async (dispatch, getState) => {
   }
 };
 
-export const addAddress = (data, headers) => async (dispatch, getState) => {
+export const addAddress = (data) => async (dispatch, getState) => {
+  const user = getState().user;
+  console.warn('user', user);
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${user?.token}`,
+    },
+  };
   try {
     const response = await axios.post(
       'http://www.rncourseproject.com/app/address',
@@ -59,11 +66,18 @@ export const addAddress = (data, headers) => async (dispatch, getState) => {
   }
 };
 
-export const getAddresses = (headers) => async (dispatch, getState) => {
+export const getAddresses = () => async (dispatch, getState) => {
+  const user = getState().user;
+  console.warn('user', user);
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${user?.token}`,
+    },
+  };
   try {
     const response = await axios.get(
       'http://www.rncourseproject.com/app/address',
-      headers,
+      headers
     );
     console.log('adds==>', response);
     if (response) {
@@ -75,7 +89,14 @@ export const getAddresses = (headers) => async (dispatch, getState) => {
   }
 };
 
-export const updateUsername = (data, headers) => async (dispatch, getState) => {
+export const updateUsername = (data) => async (dispatch, getState) => {
+  const user = getState().user;
+  console.warn('user', user);
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${user?.token}`,
+    },
+  };
   try {
     const response = await axios.put(
       'http://www.rncourseproject.com/app/user/change-name',
@@ -88,7 +109,14 @@ export const updateUsername = (data, headers) => async (dispatch, getState) => {
   }
 };
 
-export const fetchUserDate = (headers) => async (dispatch, getState) => {
+export const fetchUserDate = () => async (dispatch, getState) => {
+  const user = getState().user;
+  console.warn('user', user);
+  const headers = {
+    headers: {
+      Authorization: `Bearer ${user?.token}`,
+    },
+  };
   try {
     const response = await axios.get(
       'http://www.rncourseproject.com/app/user/get-data',
