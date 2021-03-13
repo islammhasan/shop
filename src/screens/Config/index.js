@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 import {View, FlatList, Text, TouchableOpacity, Button} from 'react-native';
 import {useDispatch} from 'react-redux';
+import {getCountry, getLanguage} from '../../redux/settings';
 import {
   getChildrenCats,
   getChildrenCatsProducts,
-  getCountry,
-  getLanguage,
   getParentCats,
   getParentCatsProducts,
-} from '../../redux/user';
+} from '../../redux/categories';
 import styles from './styles';
 
 const emptySpace = () => {
