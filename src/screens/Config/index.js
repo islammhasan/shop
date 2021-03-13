@@ -32,27 +32,27 @@ export const Config = () => {
   };
 
   const updateParentCats = async () => {
-    const response = await dispatch(getParentCats());
+    const response = await getParentCats();
     setParentCats(response);
   };
 
   const updateChildrenCats = async () => {
-    const response = await dispatch(getChildrenCats(parentCatId));
+    const response = await getChildrenCats(parentCatId);
     setChildrenCats(response);
   };
 
   const updateParentCatsProducts = async () => {
-    const response = await dispatch(getParentCatsProducts(parentCatId));
+    const response = await getParentCatsProducts(parentCatId);
     setParentProducts(response);
   };
 
   const updateChildrenCatsProducts = async () => {
-    const response = await dispatch(getChildrenCatsProducts(childCatId));
+    const response = await getChildrenCatsProducts(childCatId);
     setChildrenProducts(response);
   };
 
   return (
-    <View>
+    <View style={{marginTop: 100}}>
       <Button title={'get parent categories'} onPress={updateParentCats} />
       <Button title={'get children categories'} onPress={updateChildrenCats} />
       <Button

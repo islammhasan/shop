@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getParentCats = () => async (dispatch, getState) => {
+export const getParentCats = async () => {
   try {
     const response = await axios.get(
       'http://www.rncourseproject.com/app/category/get-parents',
@@ -12,7 +12,7 @@ export const getParentCats = () => async (dispatch, getState) => {
   }
 };
 
-export const getChildrenCats = (catID) => async (dispatch, getState) => {
+export const getChildrenCats = async (catID) => {
   try {
     const response = await axios.get(
       `http://www.rncourseproject.com/app/category/get-children/${catID}`,
@@ -24,7 +24,7 @@ export const getChildrenCats = (catID) => async (dispatch, getState) => {
   }
 };
 
-export const getParentCatsProducts = (catID) => async (dispatch, getState) => {
+export const getParentCatsProducts = async (catID) => {
   try {
     const response = await axios.get(
       `http://www.rncourseproject.com/app/product/parent-category?id=${catID}&page=1`,
@@ -36,10 +36,7 @@ export const getParentCatsProducts = (catID) => async (dispatch, getState) => {
   }
 };
 
-export const getChildrenCatsProducts = (catID) => async (
-  dispatch,
-  getState,
-) => {
+export const getChildrenCatsProducts = async (catID) => {
   try {
     const response = await axios.get(
       `http://www.rncourseproject.com/app/product/category?id=${catID}&page=1`,
@@ -50,5 +47,3 @@ export const getChildrenCatsProducts = (catID) => async (
     console.log('err==>', error);
   }
 };
-
-export default (state, action) => {};
