@@ -25,6 +25,7 @@ import {
   updateUsername,
   userLogin,
 } from '../../redux/user';
+import {useCart} from '../../redux/cart';
 export const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -32,8 +33,17 @@ export const Home = ({navigation}) => {
   const [featureData, setFeatureData] = useState([]);
   const [bestSellData, setBestSellData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const {
+    getCartItems,
+    addProductToCart,
+    increaseProduct,
+    decreaseProduct,
+    deleteProduct,
+  } = useCart();
+
   useEffect(() => {
     initialFetch();
+    // getCartItems()
   }, []);
 
   useLayoutEffect(() => {
@@ -137,6 +147,15 @@ export const Home = ({navigation}) => {
   const newUsername = {
     name: 'issagain',
   };
+  const productData = {
+    product: '5f8d6063d3662c3c7ee310b5',
+    cost: 198.9,
+    count: 1,
+  };
+  const productDataToUpdate = {
+    id: '604c1ebb47d27d0503fae209',
+    count: 1,
+  };
 
   return (
     <View style={styles.firstLevelContainer}>
@@ -146,6 +165,24 @@ export const Home = ({navigation}) => {
         onPress={() => dispatch(addAddress(addressData))}
       />
       <Button title="get address" onPress={() => dispatch(getAddresses())} />
+      <Button
+        title="add product to cart"
+        onPress={() => addProductToCart(productData)}
+      />
+      <Button
+        title="increase product to cart"
+        onPress={() => increaseProduct(productDataToUpdate)}
+      />
+      <Button
+        title="decrease product to cart"
+        onPress={() => decreaseProduct(productDataToUpdate)}
+      />
+
+      <Button
+        title="delete product to cart"
+        onPress={() => deleteProduct(productDataToUpdate)}
+      />
+
       <Button
         title="update username"
         onPress={() => dispatch(updateUsername(newUsername))}
