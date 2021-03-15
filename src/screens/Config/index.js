@@ -10,7 +10,6 @@ import {
 } from '../../redux/categories';
 import styles from './styles';
 import {getUserOrders} from '../../redux/orders';
-import {searchProducts} from '../../redux/search';
 
 const emptySpace = () => {
   return <View style={styles.divider}></View>;
@@ -55,10 +54,6 @@ export const Config = () => {
 
   return (
     <View style={{marginTop: 100}}>
-      <Button
-        title={'search'}
-        onPress={() => searchProducts()}
-      />
       <Button
         title={'get user orders'}
         onPress={() => dispatch(getUserOrders())}

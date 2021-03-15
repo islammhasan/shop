@@ -9,13 +9,11 @@ import {
 import { images } from '../../assets';
 
 export const SearchBar = (props) => {
-  const { onChange, value } = props
+  const { onSearchPress } = props
   return (
     <View style={styles.searchBar}>
       <TouchableOpacity
-        onPress={() => {
-          alert('Searched');
-        }}
+        onPress={onSearchPress}
         style={styles.searchIconContainer}>
         <Image
           source={images.search}
@@ -24,8 +22,7 @@ export const SearchBar = (props) => {
         />
       </TouchableOpacity>
       <TextInput
-        onChangeText={onChange}
-        value={value}
+        {...props}
         placeholder={'Search Your Product'}
         placeholderTextColor="grey"
         style={styles.searchTextInput}

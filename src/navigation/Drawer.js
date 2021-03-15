@@ -1,14 +1,16 @@
 import React from 'react';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import {Favorite} from '../screens/Favorite';
-import {MyOrders} from '../screens/MyOrders';
-import {MainStack} from './MainStack';
-import {ProfileStack} from './ProfileStack';
-import {CartStack} from './CartStack';
-import {FavoriteStack} from './FavoriteStack';
-import {MyOrdersStack} from './MyOrdersStack';
-import {Config} from '../screens/Config';
-import {Search} from '../screens/Search';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { Favorite } from '../screens/Favorite';
+import { MyOrders } from '../screens/MyOrders';
+import { MainStack } from './MainStack';
+import { ProfileStack } from './ProfileStack';
+import { CartStack } from './CartStack';
+import { FavoriteStack } from './FavoriteStack';
+import { MyOrdersStack } from './MyOrdersStack';
+import { Config } from '../screens/Config';
+import { Search } from '../screens/Search';
+import { UserSignup } from '../screens/UserSignup';
+import { UserConfirm } from '../screens/UserConfirm';
 
 const Drawer = createDrawerNavigator();
 
@@ -16,27 +18,29 @@ export const AppDrawer = () => {
   return (
     <Drawer.Navigator
       edgeWidth={50}
-      drawerStyle={{paddingTop: 50}}
+      drawerStyle={{ paddingTop: 50 }}
       initialRouteName="MainStack">
       <Drawer.Screen
-        options={{title: 'Home'}}
+        options={{ title: 'Home' }}
         name="MainStack"
         component={MainStack}
       />
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen
-        options={{title: 'My Cart'}}
+        options={{ title: 'My Cart' }}
         name="CartStack"
         component={CartStack}
       />
       <Drawer.Screen name="Favorite" component={FavoriteStack} />
       <Drawer.Screen
-        options={{title: 'My Orders'}}
+        options={{ title: 'My Orders' }}
         name="MyOrders"
         component={MyOrdersStack}
       />
       <Drawer.Screen name={'Settings'} component={Config} />
       <Drawer.Screen name={'Search'} component={Search} />
+      <Drawer.Screen name={'User Signup'} component={UserSignup} />
+      <Drawer.Screen name={'User Confirm'} component={UserConfirm} />
     </Drawer.Navigator>
   );
 };

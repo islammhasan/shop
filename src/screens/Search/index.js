@@ -1,14 +1,21 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { images } from '../../assets';
 import { SearchBar } from '../../components';
 import styles from './styles';
 
 
-export const Search = () => {
-  const [val, setVal] = useState('')
+export const Search = ({ navigation, route }) => {
+  const { homeSearchVal } = route.params;
+  const [val, setVal] = useState(homeSearchVal)
   const [searchData, setSearchData] = useState([])
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: null,
+    });
+  }, [navigation]);
 
   useEffect(() => {
     fetchData()
@@ -27,9 +34,12 @@ export const Search = () => {
     }
   }
 
+  console.warn(homeSearchVal);
+  const url = 'http://www.rncourseproject.com/uploads/products/resized/';
+
   return (
     <View style={styles.container}>
-      <SearchBar value={val} onChange={(val) => setVal(val)} />
+      <SearchBar value={val} onChangeText={(val) => setVal(val)} />
       <FlatList
         showsVerticalScrollIndicator={false}
         data={searchData}
@@ -43,9 +53,9 @@ export const Search = () => {
             activeOpacity={0.8}
             horizontal={false}
             style={styles.itemContainerStyle}>
-            <Image style={styles.itemImageStyle} source={item.images[0]} />
-            <Text style={styles.itemPriceStyle}>${item.price}</Text>
-            <Text style={styles.itemTitleStyle}>{item.title}</Text>
+            <Image style={styles.itemImageStyle} source={{ uri: url + item.images[0] }} />
+            <Text numberOfLines={1} style={styles.itemPriceStyle}>${item.price}</Text>
+            <Text numberOfLines={2} style={styles.itemTitleStyle}>{item.title}</Text>
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item._id}

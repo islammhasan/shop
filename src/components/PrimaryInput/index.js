@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   View,
@@ -7,7 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import {colors} from '../../assets/colors';
+import { colors } from '../../assets/colors';
 
 export const PrimaryInput = (props) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -18,6 +18,7 @@ export const PrimaryInput = (props) => {
     rightIconStyle,
     onPress,
     customStyle,
+    inputCustomStyle,
   } = props;
   return (
     <View
@@ -27,12 +28,12 @@ export const PrimaryInput = (props) => {
         customStyle,
       ]}>
       <Text style={styles.labelStyle}>{text}</Text>
-      <View style={{flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row' }}>
         <TextInput
           onFocus={() => setIsFocused(!isFocused)}
           onBlur={() => setIsFocused(!isFocused)}
           {...props}
-          style={styles.textInputStyle}
+          style={[styles.textInputStyle, inputCustomStyle]}
         />
         {rightIcon && (
           <TouchableOpacity

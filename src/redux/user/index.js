@@ -9,8 +9,8 @@ export const types = {
   // GET_ADDRESS_FAILED: 'GET_ADDRESS_FAILED',
 };
 
-export const userLogin = () => async (dispatch, getState) => {
-  const data = {phone: '0123456789'};
+export const userLogin = (phoneNumber) => async (dispatch, getState) => {
+  const data = {phone: phoneNumber};
   try {
     const response = await axios.post(
       'http://www.rncourseproject.com/app/verify',
@@ -26,7 +26,11 @@ export const userLogin = () => async (dispatch, getState) => {
   }
 };
 
-export const confirmUser = (data) => async (dispatch, getState) => {
+export const confirmUser = (phoneNumber, validation) => async (
+  dispatch,
+  getState,
+) => {
+  const data = {phone: phoneNumber, code: validation};
   try {
     const response = await axios.post(
       'http://www.rncourseproject.com/app/verify/validate',
@@ -77,7 +81,7 @@ export const getAddresses = () => async (dispatch, getState) => {
   try {
     const response = await axios.get(
       'http://www.rncourseproject.com/app/address',
-      headers
+      headers,
     );
     console.log('adds==>', response);
     if (response) {
@@ -131,7 +135,6 @@ export const fetchUserDate = () => async (dispatch, getState) => {
     console.log('userDataError==>', error);
   }
 };
-
 
 const initialState = {
   code: null,

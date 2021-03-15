@@ -33,6 +33,8 @@ export const Home = ({navigation}) => {
   const [featureData, setFeatureData] = useState([]);
   const [bestSellData, setBestSellData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [homeSearchVal, setHomeSearchVal] = useState('');
+
   const {
     getCartItems,
     addProductToCart,
@@ -157,6 +159,16 @@ export const Home = ({navigation}) => {
     count: 1,
   };
 
+  // search validation
+  // homeSearchVal.length
+  // homeSearchVal !== ''
+  const searchPress = () => {
+    if (Boolean(homeSearchVal)) {
+      navigation.navigate('Search', {homeSearchVal});
+      setHomeSearchVal('');
+    }
+  };
+
   return (
     <View style={styles.firstLevelContainer}>
       {/* <Button title="ss" onPress={() => dispatch(confirmUser(data))} />
@@ -199,7 +211,12 @@ export const Home = ({navigation}) => {
         onCartPress={() => alert('onCartPress')}
         onFilterPress={() => alert('onFilterPress')}
       /> */}
-      <SearchBar />
+      <SearchBar
+        onSubmitEditing={() => searchPress()}
+        onSearchPress={() => searchPress()}
+        value={homeSearchVal}
+        onChangeText={(homeSearchVal) => setHomeSearchVal(homeSearchVal)}
+      />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.container}>
