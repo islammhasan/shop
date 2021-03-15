@@ -159,7 +159,7 @@ export const Home = ({navigation}) => {
 
   return (
     <View style={styles.firstLevelContainer}>
-      <Button title="ss" onPress={() => dispatch(confirmUser(data))} />
+      {/* <Button title="ss" onPress={() => dispatch(confirmUser(data))} />
       <Button
         title="add address"
         onPress={() => dispatch(addAddress(addressData))}
@@ -190,7 +190,7 @@ export const Home = ({navigation}) => {
       <Button
         title="fetch user data"
         onPress={() => dispatch(fetchUserDate())}
-      />
+      /> */}
       {/* <Header
         hasMenu
         hasCart

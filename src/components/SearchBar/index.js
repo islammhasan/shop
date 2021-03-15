@@ -6,9 +6,10 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
-import {images} from '../../assets';
+import { images } from '../../assets';
 
-export const SearchBar = () => {
+export const SearchBar = (props) => {
+  const { onChange, value } = props
   return (
     <View style={styles.searchBar}>
       <TouchableOpacity
@@ -23,8 +24,8 @@ export const SearchBar = () => {
         />
       </TouchableOpacity>
       <TextInput
-        // onChangeText={}
-        // value={}
+        onChangeText={onChange}
+        value={value}
         placeholder={'Search Your Product'}
         placeholderTextColor="grey"
         style={styles.searchTextInput}

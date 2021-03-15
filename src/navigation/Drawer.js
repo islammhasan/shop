@@ -8,6 +8,7 @@ import {CartStack} from './CartStack';
 import {FavoriteStack} from './FavoriteStack';
 import {MyOrdersStack} from './MyOrdersStack';
 import {Config} from '../screens/Config';
+import {Search} from '../screens/Search';
 
 const Drawer = createDrawerNavigator();
 
@@ -35,6 +36,7 @@ export const AppDrawer = () => {
         component={MyOrdersStack}
       />
       <Drawer.Screen name={'Settings'} component={Config} />
+      <Drawer.Screen name={'Search'} component={Search} />
     </Drawer.Navigator>
   );
 };

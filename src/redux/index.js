@@ -1,8 +1,10 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import products from './products';
 import settings from './settings';
 import user from './user';
 import cart from './cart';
+import orders from './orders';
+import search from './search';
 
 // All reducers.
 export default combineReducers({
@@ -10,4 +12,6 @@ export default combineReducers({
   user,
   settings,
   cart,
+  orders,
+  search
 });
