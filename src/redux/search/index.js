@@ -11,8 +11,8 @@ export const searchProducts = (term) => async (dispatch, getState) => {
     const response = await axios.get(
       `http://www.rncourseproject.com/app/product/search?query=${term}&page=${pageNumber}`,
     );
-    console.log('res==>', response.data);
-    dispatch({ type: types.SEARCH_SUCCESS, payload: response.data })
+    console.log('res==>', response.data.data);
+    dispatch({ type: types.SEARCH_SUCCESS, payload: response.data.data })
   } catch (error) {
     console.log('error', error);
   }
