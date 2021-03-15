@@ -1,25 +1,27 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { images } from '../../assets';
 import { SearchBar } from '../../components';
-import { searchProducts } from '../../redux/search';
 import styles from './styles';
 
 
 export const Search = () => {
   const [val, setVal] = useState('')
   const [searchData, setSearchData] = useState([])
-  const dispatch = useDispatch()
 
-  useEffect((val) => {
-    fetchData(val)
+  useEffect(() => {
+    fetchData()
   }, [val])
 
-  const fetchData = async (val) => {
+  const fetchData = async () => {
+    const pageNumber = 1;
     try {
-      const response = await dispatch(searchProducts(val))
-      setSearchData(response)
+      const response = await axios.get(
+        `http://www.rncourseproject.com/app/product/search?query=${val}&page=${pageNumber}`
+      );
+      console.log('res==>', response.data.data);
+      setSearchData(response.data.data)
     } catch (error) {
       console.log('error', error);
     }
@@ -41,12 +43,12 @@ export const Search = () => {
             activeOpacity={0.8}
             horizontal={false}
             style={styles.itemContainerStyle}>
-            <Image style={styles.itemImageStyle} source={item.url} />
-            <Text style={styles.itemPriceStyle}>{item.price}</Text>
+            <Image style={styles.itemImageStyle} source={item.images[0]} />
+            <Text style={styles.itemPriceStyle}>${item.price}</Text>
             <Text style={styles.itemTitleStyle}>{item.title}</Text>
           </TouchableOpacity>
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
       />
     </View>
   );

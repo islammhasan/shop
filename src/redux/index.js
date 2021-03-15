@@ -4,7 +4,6 @@ import settings from './settings';
 import user from './user';
 import cart from './cart';
 import orders from './orders';
-import search from './search';
 
 // All reducers.
 export default combineReducers({
@@ -13,5 +12,4 @@ export default combineReducers({
   settings,
   cart,
   orders,
-  search
 });
