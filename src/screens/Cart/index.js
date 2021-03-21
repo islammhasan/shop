@@ -1,23 +1,29 @@
-import React, { useState, useLayoutEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
-import { Header } from '../../components/Header';
-import { Button } from '../../components/Button';
+import React, {useState, useLayoutEffect} from 'react';
+import {View, Text, TouchableOpacity, Image, FlatList} from 'react-native';
+import {Header} from '../../components/Header';
+import {Button} from '../../components/Button';
 import styles from './styles';
-import { images } from '../../assets';
-import { MenuComponent } from '../../components';
+import {images} from '../../assets';
+import {MenuComponent} from '../../components';
+import {useDispatch, useSelector} from 'react-redux';
+import {deleteItem} from '../../redux/cartLocal';
 
-export const Cart = ({ navigation }) => {
+export const Cart = ({navigation}) => {
   const [showIndicator, setShowIndicator] = useState(false);
   const [counter, setCounter] = useState(1);
+  const cartItems = useSelector((state) => state.cartLocal.items);
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => {
-        return <MenuComponent />
+        return <MenuComponent />;
       },
       headerTitle: null,
-    })
-  }, [navigation])
+    });
+  }, [navigation]);
+
+  const dispatch = useDispatch();
+
   return (
     <View style={styles.container}>
       {/* <Header
@@ -30,20 +36,24 @@ export const Cart = ({ navigation }) => {
       <FlatList
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listStyle}
-        data={DATA}
-        renderItem={({ item }) => {
+        data={cartItems}
+        renderItem={({item}) => {
           return (
             <View key={item.id} style={styles.itemContainer}>
               <View style={styles.imageContainer}>
-                <Image style={styles.itemImage} source={item.url} />
+                <Image
+                  resizeMode="contain"
+                  style={styles.itemImage}
+                  source={{uri: item.image}}
+                />
               </View>
               <View style={styles.itemDetails}>
                 <Text numberOfLines={1} style={styles.itemTitle}>
                   {item.title}
                 </Text>
-                <Text numberOfLines={1} style={styles.itemBrand}>
+                {/* <Text numberOfLines={1} style={styles.itemBrand}>
                   {item.brand}
-                </Text>
+                </Text> */}
                 <Text numberOfLines={1} style={styles.itemPrice}>
                   ${item.price}
                 </Text>
@@ -53,7 +63,7 @@ export const Cart = ({ navigation }) => {
                     style={styles.counterItem}>
                     <Text style={styles.counterMinus}>-</Text>
                   </TouchableOpacity>
-                  <Text style={styles.counterText}>{counter}</Text>
+                  <Text style={styles.counterText}>{item.quantity}</Text>
                   <TouchableOpacity
                     onPress={() => setCounter(counter + 1)}
                     style={styles.counterItem}>
@@ -63,7 +73,7 @@ export const Cart = ({ navigation }) => {
               </View>
               <TouchableOpacity
                 style={styles.removeContainer}
-                onPress={() => alert('Item removed!')}>
+                onPress={() => dispatch(deleteItem(item.id))}>
                 <Image style={styles.remove} source={images.remove} />
               </TouchableOpacity>
             </View>

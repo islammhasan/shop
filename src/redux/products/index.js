@@ -8,7 +8,7 @@ export const types = {
 export const getProducts = () => async (dispatch, getState) => {
   dispatch({type: types.STARTLOADING});
   try {
-    const response = await axios.get('https://fakestoreapi.com/products', {
+    const response = await axios.get('https://fakestoreapi.herokuapp.com/products', {
       params: {
         limit: 5,
       },

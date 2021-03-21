@@ -39,8 +39,6 @@ export const AppDrawer = () => {
       />
       <Drawer.Screen name={'Settings'} component={Config} />
       <Drawer.Screen name={'Search'} component={Search} />
-      <Drawer.Screen name={'User Signup'} component={UserSignup} />
-      <Drawer.Screen name={'User Confirm'} component={UserConfirm} />
     </Drawer.Navigator>
   );
 };

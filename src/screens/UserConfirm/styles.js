@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../assets';
 
 export default styles = StyleSheet.create({
   container: {
@@ -25,8 +26,14 @@ export default styles = StyleSheet.create({
   },
   btnStyle: {
     width: null,
+    marginHorizontal: 80,
+    marginTop: 50,
+  },
+  resendBtnStyle: {
+    width: null,
     marginHorizontal: 120,
     marginTop: 50,
+    backgroundColor: null,
   },
   labelStyle: {
     alignSelf: 'center',
@@ -35,5 +42,9 @@ export default styles = StyleSheet.create({
   },
   btnTxtStyle: {
     fontSize: 20,
+  },
+  resendBtnTxtStyle: {
+    fontSize: 20,
+    color: colors.main,
   },
 });

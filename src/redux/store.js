@@ -18,7 +18,8 @@ const reactotrionEnhancer = Reactotron.createEnhancer();
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['user', 'settings', 'cart'],
+  // whitelist: [],
+  whitelist: ['user', 'settings', 'cart']
 };
 const persistedReducer = persistReducer(persistConfig, reducers);
 export const store = createStore(

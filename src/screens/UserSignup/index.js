@@ -12,10 +12,10 @@ export const UserSignup = ({navigation}) => {
   const dispatch = useDispatch();
 
   const confirmSignup = async () => {
-    if (phoneNumber.length == 11 && phoneNumber[0] == 0) {
+    if (phoneNumber.length == 11 && phoneNumber.startsWith(0)) {
       setShowIndicator(true);
       await dispatch(userLogin(phoneNumber));
-      navigation.navigate('User Confirm', phoneNumber);
+      navigation.navigate('UserConfirm', {phoneNumber});
       setShowIndicator(false);
     } else {
       alert(

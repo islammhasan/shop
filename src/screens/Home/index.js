@@ -109,7 +109,7 @@ export const Home = ({navigation}) => {
   };
   const getBestSellProducts = async () => {
     try {
-      await fetch('https://fakestoreapi.com/products/category/jewelery')
+      await fetch('https://fakestoreapi.herokuapp.com/products/category/jewelery')
         .then((res) => res.json())
         .then((json) => setBestSellData(json))
         .catch((e) => console.warn('e', e));
@@ -119,7 +119,7 @@ export const Home = ({navigation}) => {
   };
   const getCategories = async () => {
     try {
-      await fetch('https://fakestoreapi.com/products/categories')
+      await fetch('https://fakestoreapi.herokuapp.com/products/categories')
         .then((res) => res.json())
         .then((json) => setCategories(json))
         .catch((e) => console.warn('e', e));
