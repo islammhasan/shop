@@ -189,7 +189,7 @@ export const ItemDetails = ({navigation, route}) => {
       </ScrollView>
       <View style={styles.bottomBtns}>
         <TouchableOpacity
-          onPress={() => dispatch(addToCart({...item, quantity: 1}))}
+          onPress={() => dispatch(addToCart(item))}
           activeOpacity={0.8}
           style={styles.addToCart}>
           <Text style={styles.addToCartText}>ADD TO CART</Text>

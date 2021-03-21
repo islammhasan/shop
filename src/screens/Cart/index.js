@@ -6,7 +6,7 @@ import styles from './styles';
 import {images} from '../../assets';
 import {MenuComponent} from '../../components';
 import {useDispatch, useSelector} from 'react-redux';
-import {deleteItem} from '../../redux/cartLocal';
+import {decreaseCount, deleteItem, increaseCount} from '../../redux/cartLocal';
 
 export const Cart = ({navigation}) => {
   const [showIndicator, setShowIndicator] = useState(false);
@@ -37,6 +37,7 @@ export const Cart = ({navigation}) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listStyle}
         data={cartItems}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({item}) => {
           return (
             <View key={item.id} style={styles.itemContainer}>
@@ -59,13 +60,17 @@ export const Cart = ({navigation}) => {
                 </Text>
                 <View style={styles.counterContainer}>
                   <TouchableOpacity
-                    onPress={() => counter > 1 && setCounter(counter - 1)}
+                    onPress={() =>
+                      item.qty > 1
+                        ? dispatch(decreaseCount(item))
+                        : dispatch(deleteItem(item.id))
+                    }
                     style={styles.counterItem}>
                     <Text style={styles.counterMinus}>-</Text>
                   </TouchableOpacity>
-                  <Text style={styles.counterText}>{item.quantity}</Text>
+                  <Text style={styles.counterText}>{item.qty}</Text>
                   <TouchableOpacity
-                    onPress={() => setCounter(counter + 1)}
+                    onPress={() => dispatch(increaseCount(item))}
                     style={styles.counterItem}>
                     <Text style={styles.counterPlus}>+</Text>
                   </TouchableOpacity>
@@ -78,9 +83,6 @@ export const Cart = ({navigation}) => {
               </TouchableOpacity>
             </View>
           );
-        }}
-        keyExtractor={(item) => {
-          item.id;
         }}
       />
       <Button

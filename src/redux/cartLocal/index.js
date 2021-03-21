@@ -10,23 +10,30 @@ const types = {
 };
 
 export const addToCart = (item) => (dispatch, getState) => {
-  const cartArray = getState().cartLocal.items;
-  const product = cartArray.find((product) => product.id == item.id);
-  console.log(product);
   try {
-    if (product) {
-      dispatch({type: types.INCREASE_COUNT_SUCCESS});
-    } else {
-      dispatch({type: types.ADD_ITEM_SUCCESS, payload: item});
-    }
+    dispatch({type: types.ADD_ITEM_SUCCESS, payload: item});
   } catch (error) {
     console.log('err==>', error);
   }
 };
 
-export const increaseCount = () => {};
+export const increaseCount = (item) => (dispatch, getState) => {
+  console.warn('item', item);
+  try {
+    dispatch({type: types.INCREASE_COUNT_SUCCESS, payload: item});
+  } catch (error) {
+    console.log('err==>', error);
+  }
+};
 
-export const decreaseCount = () => {};
+export const decreaseCount = (item) => (dispatch, getState) => {
+  console.warn('item', item);
+  try {
+    dispatch({type: types.DECREASE_COUNT_SUCCESS, payload: item});
+  } catch (error) {
+    console.log('err==>', error);
+  }
+};
 
 export const deleteItem = (itemId) => (dispatch, getState) => {
   const cartArray = getState().cartLocal.items;
@@ -45,15 +52,37 @@ const initialState = {
 export default (state = initialState, {type, payload}) => {
   switch (type) {
     case types.ADD_ITEM_SUCCESS:
-      return {...state, items: [...state.items, payload]};
+      // Check if Item is in cart already
+      const inCart = state.items.find((item) => item.id == payload.id)
+        ? true
+        : false;
+      return {
+        ...state,
+        items: inCart
+          ? state.items.map((item) =>
+              item.id == payload.id ? {...item, qty: item.qty + 1} : item,
+            )
+          : [...state.items, {...payload, qty: 1}],
+      };
+
     case types.ADD_ITEM_FAILED:
       return {...state};
-    case types.INCREASE_COUNT_SUCCESS:
-      return {...state, payload};
     case types.INCREASE_COUNT_FAILED:
       return {...state};
+    case types.INCREASE_COUNT_SUCCESS:
+      return {
+        ...state,
+        items: state.items.map((item) =>
+          item.id == payload.id ? {...item, qty: item.qty + 1} : item,
+        ),
+      };
     case types.DECREASE_COUNT_SUCCESS:
-      return {...state, payload};
+      return {
+        ...state,
+        items: state.items.map((item) =>
+          item.id == payload.id ? {...item, qty: item.qty - 1} : item,
+        ),
+      };
     case types.DECREASE_COUNT_FAILED:
       return {...state};
     case types.DELETE_ITEM_SUCCESS:

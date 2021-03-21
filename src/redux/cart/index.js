@@ -68,7 +68,7 @@ export const useCart = () => {
       );
       console.log('decreaseProduct==>', response.data);
       if (response) {
-        getCartItems();
+        getCartItems(); 
       }
     } catch (error) {
       console.log('err==>', error);

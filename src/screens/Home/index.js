@@ -250,7 +250,7 @@ export const Home = ({navigation}) => {
                 </Text>
               </TouchableOpacity>
             )}
-            keyExtractor={(item) => item}
+            keyExtractor={(item) => item.toString()}
             horizontal
           />
         </View>
@@ -299,7 +299,7 @@ export const Home = ({navigation}) => {
                 </TouchableOpacity>
               );
             }}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             horizontal
           />
         </View>
@@ -348,7 +348,7 @@ export const Home = ({navigation}) => {
                 </TouchableOpacity>
               );
             }}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             horizontal
           />
         </View>
