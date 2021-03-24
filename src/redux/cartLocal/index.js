@@ -67,8 +67,6 @@ export default (state = initialState, {type, payload}) => {
 
     case types.ADD_ITEM_FAILED:
       return {...state};
-    case types.INCREASE_COUNT_FAILED:
-      return {...state};
     case types.INCREASE_COUNT_SUCCESS:
       return {
         ...state,
@@ -76,6 +74,8 @@ export default (state = initialState, {type, payload}) => {
           item.id == payload.id ? {...item, qty: item.qty + 1} : item,
         ),
       };
+    case types.INCREASE_COUNT_FAILED:
+      return {...state};
     case types.DECREASE_COUNT_SUCCESS:
       return {
         ...state,

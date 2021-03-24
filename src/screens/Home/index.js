@@ -8,23 +8,14 @@ import {
   Image,
   FlatList,
   ActivityIndicator,
-  Button,
 } from 'react-native';
-import {colors, images} from '../../assets';
+import {colors} from '../../assets';
 import {SearchBar} from '../../components/SearchBar';
 import styles from './styles';
 import axios from 'axios';
 import {Cart, FilterComponent, MenuComponent} from '../../components';
 import {useDispatch, useSelector} from 'react-redux';
-import {actions, getProducts} from '../../redux/products';
-import {
-  addAddress,
-  confirmUser,
-  fetchUserDate,
-  getAddresses,
-  updateUsername,
-  userLogin,
-} from '../../redux/user';
+import {getProducts} from '../../redux/products';
 import {useCart} from '../../redux/cart';
 export const Home = ({navigation}) => {
   const dispatch = useDispatch();
@@ -35,17 +26,8 @@ export const Home = ({navigation}) => {
   const [loading, setLoading] = useState(true);
   const [homeSearchVal, setHomeSearchVal] = useState('');
 
-  const {
-    getCartItems,
-    addProductToCart,
-    increaseProduct,
-    decreaseProduct,
-    deleteProduct,
-  } = useCart();
-
   useEffect(() => {
     initialFetch();
-    // getCartItems()
   }, []);
 
   useLayoutEffect(() => {
@@ -67,27 +49,11 @@ export const Home = ({navigation}) => {
 
   const initialFetch = async () => {
     await getCategories();
-    // dispatch(userLogin());
-    // await getFeatureProducts();
-    // dispatch(actions.getProducts())
     await getFeatureProductsRedux();
     await getBestSellProducts();
-    // await getFeatureProductsAxios();
     setLoading(false);
   };
 
-  const getFeatureProductsAxios = async () => {
-    try {
-      const response = await axios.get('https://fakestoreapi.com/products', {
-        params: {
-          limit: 5,
-        },
-      });
-      setFeatureData(response.data);
-    } catch (error) {
-      console.warn(error);
-    }
-  };
   const getFeatureProductsRedux = async () => {
     try {
       const response = await dispatch(getProducts());
@@ -97,16 +63,6 @@ export const Home = ({navigation}) => {
     }
   };
 
-  const getFeatureProducts = async () => {
-    try {
-      await fetch('https://fakestoreapi.com/products?limit=5')
-        .then((res) => res.json())
-        .then((json) => setFeatureData(json))
-        .catch((e) => console.warn('e', e));
-    } catch (error) {
-      console.warn('error', error);
-    }
-  };
   const getBestSellProducts = async () => {
     try {
       await fetch('https://fakestoreapi.herokuapp.com/products/category/jewelery')
@@ -171,46 +127,6 @@ export const Home = ({navigation}) => {
 
   return (
     <View style={styles.firstLevelContainer}>
-      {/* <Button title="ss" onPress={() => dispatch(confirmUser(data))} />
-      <Button
-        title="add address"
-        onPress={() => dispatch(addAddress(addressData))}
-      />
-      <Button title="get address" onPress={() => dispatch(getAddresses())} />
-      <Button
-        title="add product to cart"
-        onPress={() => addProductToCart(productData)}
-      />
-      <Button
-        title="increase product to cart"
-        onPress={() => increaseProduct(productDataToUpdate)}
-      />
-      <Button
-        title="decrease product to cart"
-        onPress={() => decreaseProduct(productDataToUpdate)}
-      />
-
-      <Button
-        title="delete product to cart"
-        onPress={() => deleteProduct(productDataToUpdate)}
-      />
-
-      <Button
-        title="update username"
-        onPress={() => dispatch(updateUsername(newUsername))}
-      />
-      <Button
-        title="fetch user data"
-        onPress={() => dispatch(fetchUserDate())}
-      /> */}
-      {/* <Header
-        hasMenu
-        hasCart
-        hasFilter
-        onMenuPress={() => alert('onMenuPress')}
-        onCartPress={() => alert('onCartPress')}
-        onFilterPress={() => alert('onFilterPress')}
-      /> */}
       <SearchBar
         onSubmitEditing={() => searchPress()}
         onSearchPress={() => searchPress()}

@@ -37,7 +37,7 @@ export const Cart = ({navigation}) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listStyle}
         data={cartItems}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id?.toString()}
         renderItem={({item}) => {
           return (
             <View key={item.id} style={styles.itemContainer}>
