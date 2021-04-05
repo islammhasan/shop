@@ -7,7 +7,7 @@ export const Cart = () => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      onPress={() => navigation.navigate('Cart')}
+      onPress={() => navigation.navigate('CartStack')}
       style={styles.rightIconStyle}>
       <Image
         source={images.cart}

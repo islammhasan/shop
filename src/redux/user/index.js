@@ -84,6 +84,7 @@ export const getAddresses = () => async (dispatch, getState) => {
       headers,
     );
     console.log('adds==>', response);
+    return response.data.adds
     if (response) {
       // dispatch({type: types.GET_ADDRESS_SUCCESS, payload: response.data});
     }

@@ -4,6 +4,8 @@ import {colors} from '../../assets';
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 40,
+    backgroundColor: colors.white,
   },
   screenTitle: {
     color: colors.black,
@@ -11,11 +13,11 @@ export default styles = StyleSheet.create({
     marginStart: 24,
   },
   listStyle: {
-    marginTop: 27,
+    paddingVertical: 25,
   },
   addressContainer: {
     marginBottom: 27,
-    marginHorizontal: 24,
+    paddingHorizontal: 24,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -55,6 +57,6 @@ export default styles = StyleSheet.create({
     width: null,
   },
   addAddressBtnText: {
-    color: colors.main
+    color: colors.main,
   },
 });

@@ -2,10 +2,14 @@ import {StyleSheet} from 'react-native';
 import {colors} from '../../assets';
 
 export default styles = StyleSheet.create({
+  containerStyle: {
+    backgroundColor: colors.white,
+  },
   screenTitle: {
     color: colors.black,
+    backgroundColor: colors.white,
     fontSize: 30,
-    marginStart: 24,
+    paddingStart: 24,
   },
   itemContainer: {
     flexDirection: 'row',
@@ -36,7 +40,8 @@ export default styles = StyleSheet.create({
     elevation: 1,
   },
   listStyle: {
-    marginTop: 25,
+    paddingTop: 25,
+    backgroundColor: colors.white,
   },
   itemDetails: {
     flex: 1,
@@ -102,7 +107,8 @@ export default styles = StyleSheet.create({
     fontSize: 20,
   },
   addressListStyle: {
-    marginTop: 12,
+    paddingTop: 12,
+    backgroundColor: colors.white,
   },
   addressContainer: {
     marginBottom: 27,
@@ -131,7 +137,8 @@ export default styles = StyleSheet.create({
     backgroundColor: colors.main,
   },
   paymentDetails: {
-    marginTop: 5,
+    paddingTop: 17.5,
+    backgroundColor: colors.white,
   },
   paymentText: {
     flexDirection: 'row',
@@ -151,6 +158,11 @@ export default styles = StyleSheet.create({
     height: 1,
     backgroundColor: '#D8D8D8',
     marginHorizontal: 25,
-    marginBottom: 12.5,
+  },
+  dividerSpace: {
+    marginTop: 12.5,
+  },
+  btnView: {
+    backgroundColor: colors.white,
   },
 });

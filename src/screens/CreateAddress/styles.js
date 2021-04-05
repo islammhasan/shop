@@ -9,6 +9,7 @@ export default styles = StyleSheet.create({
     color: colors.black,
     fontSize: 30,
     marginStart: 24,
+    paddingTop: 25,
   },
   inputStyle: {
     marginTop: 25,

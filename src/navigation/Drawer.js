@@ -1,7 +1,5 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { Favorite } from '../screens/Favorite';
-import { MyOrders } from '../screens/MyOrders';
 import { MainStack } from './MainStack';
 import { ProfileStack } from './ProfileStack';
 import { CartStack } from './CartStack';
@@ -9,8 +7,6 @@ import { FavoriteStack } from './FavoriteStack';
 import { MyOrdersStack } from './MyOrdersStack';
 import { Config } from '../screens/Config';
 import { Search } from '../screens/Search';
-import { UserSignup } from '../screens/UserSignup';
-import { UserConfirm } from '../screens/UserConfirm';
 
 const Drawer = createDrawerNavigator();
 

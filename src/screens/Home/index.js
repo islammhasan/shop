@@ -12,11 +12,10 @@ import {
 import {colors} from '../../assets';
 import {SearchBar} from '../../components/SearchBar';
 import styles from './styles';
-import axios from 'axios';
 import {Cart, FilterComponent, MenuComponent} from '../../components';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProducts} from '../../redux/products';
-import {useCart} from '../../redux/cart';
+
 export const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -65,7 +64,9 @@ export const Home = ({navigation}) => {
 
   const getBestSellProducts = async () => {
     try {
-      await fetch('https://fakestoreapi.herokuapp.com/products/category/jewelery')
+      await fetch(
+        'https://fakestoreapi.com/products/category/jewelery',
+      )
         .then((res) => res.json())
         .then((json) => setBestSellData(json))
         .catch((e) => console.warn('e', e));
@@ -75,7 +76,7 @@ export const Home = ({navigation}) => {
   };
   const getCategories = async () => {
     try {
-      await fetch('https://fakestoreapi.herokuapp.com/products/categories')
+      await fetch('https://fakestoreapi.com/products/categories')
         .then((res) => res.json())
         .then((json) => setCategories(json))
         .catch((e) => console.warn('e', e));

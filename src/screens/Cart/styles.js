@@ -1,10 +1,10 @@
-import { StyleSheet } from 'react-native';
-import { colors } from '../../assets';
+import {StyleSheet} from 'react-native';
+import {colors} from '../../assets';
 
 export default styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
   },
   screenTitle: {
     color: colors.black,
@@ -102,5 +102,29 @@ export default styles = StyleSheet.create({
     borderRadius: 5,
     bottom: 17,
     width: null,
+  },
+  totalText: {
+    fontSize: 18,
+    marginBottom: 30,
+    marginStart: 22,
+    color: colors.text,
+  },
+  totalPrice: {
+    color: colors.main,
+  },
+  backToShopStyle: {
+    marginHorizontal: 24,
+    height: 55,
+    borderRadius: 5,
+    width: null,
+    marginTop: 50,
+  },
+  noItemsStyle: {
+    fontSize: 22,
+    alignSelf: 'center',
+    marginTop: 100,
+  },
+  backToShopText: {
+    fontSize: 20,
   },
 });

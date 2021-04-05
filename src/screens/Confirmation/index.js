@@ -4,7 +4,7 @@ import {images} from '../../assets';
 import {Button} from '../../components/Button';
 import styles from './styles';
 
-export const Confirmation = () => {
+export const Confirmation = ({navigation}) => {
   const [showIndicator, setShowIndicator] = useState(false);
   return (
     <>
@@ -19,9 +19,7 @@ export const Confirmation = () => {
         customStyle={styles.backHomeBtn}
         title="Back to Home"
         textCustomStyle={styles.btnText}
-        isLoading={showIndicator}
-        disableBtn={showIndicator}
-        onPress={() => setShowIndicator(!showIndicator)}
+        onPress={() => navigation.navigate('Home')}
       />
     </>
   );

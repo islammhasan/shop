@@ -7,7 +7,6 @@ import {
   Image,
   FlatList,
 } from 'react-native';
-import {Header} from '../../components/Header';
 import styles from './styles';
 import Swiper from 'react-native-swiper';
 import {colors, images} from '../../assets';
@@ -46,14 +45,6 @@ export const ItemDetails = ({navigation, route}) => {
   const dispatch = useDispatch();
   return (
     <View style={styles.container}>
-      {/* <Header
-        hasBack
-        hasSearch
-        hasCart
-        onBackPress={() => alert('onBackPress')}
-        onCartPress={() => alert('onCartPress')}
-        onSearchPress={() => alert('onSearchPress')}
-      /> */}
       <ScrollView contentContainerStyle={styles.sView}>
         {/* <Swiper
           height={175}
@@ -223,17 +214,17 @@ const _colors = [
   {id: 6, color: 'white'},
 ];
 
-const _Images = [
-  {
-    id: 1,
-    url: images.slide1,
-  },
-  {
-    id: 2,
-    url: images.slide2,
-  },
-  {
-    id: 3,
-    url: images.slide3,
-  },
-];
+// const _Images = [
+//   {
+//     id: 1,
+//     url: images.slide1,
+//   },
+//   {
+//     id: 2,
+//     url: images.slide2,
+//   },
+//   {
+//     id: 3,
+//     url: images.slide3,
+//   },
+// ];

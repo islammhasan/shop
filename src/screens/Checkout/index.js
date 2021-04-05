@@ -7,54 +7,83 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import {Header} from '../../components/Header';
 import {Button} from '../../components/Button';
 import styles from './styles';
 import {images} from '../../assets';
+import {useDispatch, useSelector} from 'react-redux';
+import {decreaseCount, deleteItem, increaseCount} from '../../redux/cartLocal';
 
-export const Checkout = () => {
-  const [counter, setCounter] = useState(1);
+export const Checkout = ({navigation}) => {
+  const cartItems = useSelector((state) => state.cartLocal.items);
   const [selectedAddress, setSelectedAddress] = useState(1);
-  const [showIndicator, setShowIndicator] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState(1);
+  const dispatch = useDispatch();
+
+  let subTotal = 0;
+  let discount = 5;
+  let discountPercentage = 100;
+  let shipping = 10;
+
+  cartItems.map((item) => {
+    subTotal += item.qty * item.price;
+  });
+
+  let total = subTotal + subTotal * (discount / discountPercentage) + shipping;
+
   return (
     <>
-      <Header
-        hasBack
-        hasSearch
-        onBackPress={() => alert('onBackPress')}
-        onSearchPress={() => alert('onSearchPress')}
-      />
       <Text style={styles.screenTitle}>Checkout</Text>
       <ScrollView>
         <FlatList
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.listStyle}
-          data={ItemsData}
+          data={cartItems}
+          keyExtractor={(item) => item.id?.toString()}
           renderItem={({item}) => {
+            const {id, image, price, title, description} = item;
             return (
-              <View key={item.id} style={styles.itemContainer}>
+              <View key={id} style={styles.itemContainer}>
                 <View style={styles.imageContainer}>
-                  <Image style={styles.itemImage} source={item.url} />
+                  <Image
+                    resizeMode="contain"
+                    style={styles.itemImage}
+                    source={{uri: image}}
+                  />
                 </View>
                 <View style={styles.itemDetails}>
-                  <Text numberOfLines={1} style={styles.itemTitle}>
-                    {item.title}
-                  </Text>
-                  <Text numberOfLines={1} style={styles.itemBrand}>
-                    {item.brand}
-                  </Text>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate('ItemDetails', {
+                        id,
+                        image,
+                        price,
+                        title,
+                        description,
+                      })
+                    }>
+                    <Text numberOfLines={1} style={styles.itemTitle}>
+                      {title}
+                    </Text>
+                  </TouchableOpacity>
+                  {/* <Text numberOfLines={1} style={styles.itemBrand}>
+                  {brand}
+                </Text> */}
                   <Text numberOfLines={1} style={styles.itemPrice}>
-                    ${item.price}
+                    ${price}
                   </Text>
                   <View style={styles.counterContainer}>
                     <TouchableOpacity
-                      onPress={() => counter > 1 && setCounter(counter - 1)}
+                      onPress={() =>
+                        item.qty > 1
+                          ? dispatch(decreaseCount(item))
+                          : dispatch(deleteItem(item.id))
+                      }
                       style={styles.counterItem}>
                       <Text style={styles.counterMinus}>-</Text>
                     </TouchableOpacity>
-                    <Text style={styles.counterText}>{counter}</Text>
+                    <Text style={styles.counterText}>{item.qty}</Text>
                     <TouchableOpacity
-                      onPress={() => setCounter(counter + 1)}
+                      onPress={() => dispatch(increaseCount(item))}
                       style={styles.counterItem}>
                       <Text style={styles.counterPlus}>+</Text>
                     </TouchableOpacity>
@@ -62,14 +91,11 @@ export const Checkout = () => {
                 </View>
                 <TouchableOpacity
                   style={styles.removeContainer}
-                  onPress={() => alert('Item removed!')}>
+                  onPress={() => dispatch(deleteItem(item.id))}>
                   <Image style={styles.remove} source={images.remove} />
                 </TouchableOpacity>
               </View>
             );
-          }}
-          keyExtractor={(item) => {
-            item.id;
           }}
         />
         <FlatList
@@ -100,13 +126,39 @@ export const Checkout = () => {
           }}
         />
         <View style={styles.divider}></View>
+        <FlatList
+          data={PAYMENT_METHODS}
+          contentContainerStyle={styles.addressListStyle}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item) => {
+            item.id;
+          }}
+          renderItem={({item}) => {
+            const {id} = item;
+            const isSelected = paymentMethod == id;
+            return (
+              <TouchableOpacity
+                onPress={() => setPaymentMethod(id)}
+                activeOpacity={0.8}
+                style={styles.addressContainer}>
+                <View>
+                  <Text style={styles.addressText}>{item.method}</Text>
+                </View>
+                <View style={styles.selection}>
+                  {isSelected && <View style={styles.selected} />}
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        />
+        <View style={styles.divider}></View>
         <View style={styles.paymentDetails}>
           <View style={styles.paymentText}>
             <Text numberOfLines={1} style={styles.title}>
               Subtotal
             </Text>
             <Text numberOfLines={1} style={styles.value}>
-              $160.00
+              ${subTotal}
             </Text>
           </View>
           <View style={styles.paymentText}>
@@ -114,7 +166,7 @@ export const Checkout = () => {
               Discount
             </Text>
             <Text numberOfLines={1} style={styles.value}>
-              5%
+              {discount}%
             </Text>
           </View>
           <View style={styles.paymentText}>
@@ -122,92 +174,37 @@ export const Checkout = () => {
               Shipping
             </Text>
             <Text numberOfLines={1} style={styles.value}>
-              $10
+              ${shipping}
             </Text>
           </View>
           <View style={styles.divider}></View>
-          <View style={styles.paymentText}>
+          <View style={[styles.paymentText, styles.dividerSpace]}>
             <Text numberOfLines={1} style={styles.title}>
               Total
             </Text>
             <Text numberOfLines={1} style={styles.value}>
-              $162.00
+              ${total}
             </Text>
           </View>
         </View>
       </ScrollView>
-      <Button
-        customStyle={styles.buyBtn}
-        title="Buy"
-        textCustomStyle={styles.btnText}
-        isLoading={showIndicator}
-        disableBtn={showIndicator}
-        onPress={() => setShowIndicator(!showIndicator)}
-      />
+      <View style={styles.btnView}>
+        <Button
+          customStyle={styles.buyBtn}
+          title="Confirm Order"
+          textCustomStyle={styles.btnText}
+          onPress={() => navigation.navigate('Confirmation')}
+        />
+      </View>
     </>
   );
 };
 
 const ADDRESSES = [
   {id: '1', address: 'Shewrapara, Mirpur, Dhaka-1216', house: '938', road: '9'},
-  //   {id: '2', address: 'Chatkhil, Noakhali', house: '22', road: '7'},
 ];
 
-const ItemsData = [
-  {
-    id: '1',
-    title: 'Woman T-Shirt',
-    brand: 'Lotto.LTD',
-    price: '55.00',
-    url: images.feature1,
-  },
-  {
-    id: '2',
-    title: 'Man T-Shirt',
-    brand: 'Bata',
-    price: '34.00',
-    url: images.feature2,
-  },
-  //   {
-  //     id: '3',
-  //     title: 'Woman T-Shirt',
-  //     brand: 'Next',
-  //     price: '43.00',
-  //     url: images.feature3,
-  //   },
-  //   {
-  //     id: '4',
-  //     title: 'Woman T-Shirt',
-  //     brand: 'Plus Point',
-  //     price: '65.00',
-  //     url: images.feature4,
-  //   },
-  //   {
-  //     id: '5',
-  //     title: 'Man T-Shirt',
-  //     brand: "Cat's Eye",
-  //     price: '47.00',
-  //     url: images.feature5,
-  //   },
-  //   {
-  //     id: '6',
-  //     title: 'Woman T-Shirt',
-  //     brand: 'Lotto.LTD',
-  //     price: '39.99',
-  //     url: images.feature1,
-  //   },
-  //   {
-  //     id: '7',
-  //     title: 'Man T-Shirt',
-  //     brand: 'Bata',
-  //     price: '25.00',
-  //     url: images.feature2,
-  //   },
-  //   {
-  //     id: '8',
-  //     title: 'Woman T-Shirt',
-  //     brand: 'Next',
-  //     price: '41.00',
-  //     url: images.feature3,
-  //   },
+const PAYMENT_METHODS = [
+  {id: '1', method: 'Cash On Delivery'},
+  {id: '2', method: 'Online Payment'},
 ];
