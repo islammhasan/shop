@@ -13,9 +13,10 @@ import {images} from '../../assets';
 import {useDispatch, useSelector} from 'react-redux';
 import {decreaseCount, deleteItem, increaseCount} from '../../redux/cartLocal';
 
-export const Checkout = ({navigation}) => {
+export const Checkout = ({navigation, route}) => {
+  const {selectedAddress} = route.params;
   const cartItems = useSelector((state) => state.cartLocal.items);
-  const [selectedAddress, setSelectedAddress] = useState(1);
+  // const [selectedAddress, setSelectedAddress] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState(1);
   const dispatch = useDispatch();
 
@@ -98,7 +99,7 @@ export const Checkout = ({navigation}) => {
             );
           }}
         />
-        <FlatList
+        {/* <FlatList
           data={ADDRESSES}
           contentContainerStyle={styles.addressListStyle}
           showsVerticalScrollIndicator={false}
@@ -124,7 +125,18 @@ export const Checkout = ({navigation}) => {
               </TouchableOpacity>
             );
           }}
-        />
+        /> */}
+        <View style={styles.addressContainer}>
+          <View>
+            <Text style={styles.addressText}>{selectedAddress.phone}</Text>
+            <Text style={styles.addressText}>
+              {`${selectedAddress.city}, ${selectedAddress.area}, ${selectedAddress.street}, building ${selectedAddress.building}`}
+            </Text>
+          </View>
+          <View style={styles.selection}>
+            <View style={styles.selected} />
+          </View>
+        </View>
         <View style={styles.divider}></View>
         <FlatList
           data={PAYMENT_METHODS}

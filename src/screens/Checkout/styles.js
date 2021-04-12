@@ -111,8 +111,9 @@ export default styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   addressContainer: {
-    marginBottom: 27,
-    marginHorizontal: 24,
+    backgroundColor: colors.white,
+    paddingBottom: 18,
+    paddingHorizontal: 24,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

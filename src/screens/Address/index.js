@@ -12,7 +12,7 @@ import {useDispatch} from 'react-redux';
 import {getAddresses} from '../../redux/user';
 
 export const Address = ({navigation}) => {
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState({});
   const [addressesList, setAddressesList] = useState([]);
   const dispatch = useDispatch();
 
@@ -30,6 +30,12 @@ export const Address = ({navigation}) => {
     }
   };
 
+  const proceedToPayment = () => {
+    selectedAddress._id
+      ? navigation.navigate('Checkout', {selectedAddress})
+      : alert('Select address please!');
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.screenTitle}>Address</Text>
@@ -40,10 +46,10 @@ export const Address = ({navigation}) => {
         keyExtractor={(item) => item._id}
         renderItem={({item}) => {
           const {_id} = item;
-          const isSelected = selectedAddress == _id;
+          const isSelected = selectedAddress._id == _id;
           return (
             <TouchableOpacity
-              onPress={() => setSelectedAddress(_id)}
+              onPress={() => setSelectedAddress(item)}
               activeOpacity={0.8}
               style={styles.addressContainer}>
               <View>
@@ -68,7 +74,7 @@ export const Address = ({navigation}) => {
       <Button
         customStyle={styles.continueBtn}
         title="Continue To Payment"
-        onPress={() => navigation.navigate('Checkout')}
+        onPress={() => proceedToPayment()}
       />
     </SafeAreaView>
   );

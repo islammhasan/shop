@@ -11,7 +11,7 @@ import styles from './styles';
 import Swiper from 'react-native-swiper';
 import {colors, images} from '../../assets';
 import {Cart, Search} from '../../components';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {addToCart} from '../../redux/cartLocal';
 
 export const ItemDetails = ({navigation, route}) => {
@@ -28,6 +28,9 @@ export const ItemDetails = ({navigation, route}) => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [switchTabs, setSwitchTabs] = useState(true);
   const [numOfLines, setNumOfLines] = useState(3);
+  const cartList = useSelector((state) => state.cartLocal.items);
+  const dispatch = useDispatch();
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: null,
@@ -42,7 +45,8 @@ export const ItemDetails = ({navigation, route}) => {
     });
   }, [navigation]);
 
-  const dispatch = useDispatch();
+  const itemInCart = cartList.find((cartItem) => item.id == cartItem.id);
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.sView}>
@@ -183,7 +187,11 @@ export const ItemDetails = ({navigation, route}) => {
           onPress={() => dispatch(addToCart(item))}
           activeOpacity={0.8}
           style={styles.addToCart}>
-          <Text style={styles.addToCartText}>ADD TO CART</Text>
+          <Text style={styles.addToCartText}>
+            {itemInCart == undefined
+              ? 'ADD TO CART'
+              : `QUANTITY (${itemInCart.qty})`}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => alert('Buy Now')}
